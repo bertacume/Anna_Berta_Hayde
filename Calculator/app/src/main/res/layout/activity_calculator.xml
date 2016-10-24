@@ -17,7 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/text"
+        android:id="@+id/screen"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_above="@+id/btn_clr" />
@@ -39,7 +39,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_height="75dp" />
+        android:layout_height="75dp"
+        android:onClick="OnClickNumber" />
 
     <Button
         android:text="0"
@@ -48,7 +49,8 @@
         android:id="@+id/btn_0"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/btn_fullstop"
-        android:layout_toEndOf="@+id/btn_fullstop" />
+        android:layout_toEndOf="@+id/btn_fullstop"
+        android:onClick="OnClickNumber" />
 
     <Button
         android:text="="
@@ -57,7 +59,8 @@
         android:id="@+id/btn_equal"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/btn_0"
-        android:layout_toEndOf="@+id/btn_0" />
+        android:layout_toEndOf="@+id/btn_0"
+        android:onClick="OnClickEqual" />
 
     <Button
         android:text="1"
@@ -66,7 +69,8 @@
         android:layout_height="75dp"
         android:layout_above="@+id/btn_fullstop"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="OnClickNumber" />
 
     <Button
         android:text="4"
@@ -75,7 +79,8 @@
         android:layout_height="75dp"
         android:layout_above="@+id/btn_1"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="OnClickNumber" />
 
     <Button
         android:text="2"
@@ -84,7 +89,8 @@
         android:layout_height="75dp"
         android:layout_above="@+id/btn_0"
         android:layout_toRightOf="@+id/btn_1"
-        android:layout_toEndOf="@+id/btn_1" />
+        android:layout_toEndOf="@+id/btn_1"
+        android:onClick="OnClickNumber" />
 
     <Button
         android:text="5"
@@ -93,16 +99,18 @@
         android:layout_height="75dp"
         android:layout_above="@+id/btn_2"
         android:layout_toRightOf="@+id/btn_7"
-        android:layout_toEndOf="@+id/btn_7" />
+        android:layout_toEndOf="@+id/btn_7"
+        android:onClick="OnClickNumber" />
 
     <Button
         android:text="+"
         android:layout_width="75dp"
-        android:id="@+id/btn_plus"
+        android:id="@+id/btn_add"
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/btn_equal"
-        android:layout_toEndOf="@+id/btn_equal" />
+        android:layout_toEndOf="@+id/btn_equal"
+        android:onClick="OnClickSign" />
 
     <Button
         android:text="-"
@@ -111,7 +119,8 @@
         android:layout_height="75dp"
         android:layout_above="@+id/btn_equal"
         android:layout_toRightOf="@+id/btn_3"
-        android:layout_toEndOf="@+id/btn_3" />
+        android:layout_toEndOf="@+id/btn_3"
+        android:onClick="OnClickSign" />
 
     <Button
         android:text="x"
@@ -120,7 +129,8 @@
         android:layout_height="75dp"
         android:layout_above="@+id/btn_subtract"
         android:layout_alignLeft="@+id/btn_subtract"
-        android:layout_alignStart="@+id/btn_subtract" />
+        android:layout_alignStart="@+id/btn_subtract"
+        android:onClick="OnClickSign" />
 
     <Button
         android:text="3"
@@ -129,7 +139,8 @@
         android:layout_height="75dp"
         android:layout_alignBottom="@+id/btn_2"
         android:layout_toRightOf="@+id/btn_2"
-        android:layout_toEndOf="@+id/btn_2" />
+        android:layout_toEndOf="@+id/btn_2"
+        android:onClick="OnClickNumber" />
 
     <Button
         android:text="6"
@@ -138,7 +149,8 @@
         android:layout_height="75dp"
         android:layout_alignBottom="@+id/btn_5"
         android:layout_toRightOf="@+id/btn_5"
-        android:layout_toEndOf="@+id/btn_5" />
+        android:layout_toEndOf="@+id/btn_5"
+        android:onClick="OnClickNumber" />
 
     <Button
         android:text="7"
@@ -147,7 +159,8 @@
         android:layout_height="75dp"
         android:layout_above="@+id/btn_4"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="OnClickNumber" />
 
     <Button
         android:text="9"
@@ -156,7 +169,8 @@
         android:layout_height="75dp"
         android:layout_above="@+id/btn_multiply"
         android:layout_toRightOf="@+id/btn_5"
-        android:layout_toEndOf="@+id/btn_5" />
+        android:layout_toEndOf="@+id/btn_5"
+        android:onClick="OnClickNumber" />
 
     <Button
         android:text="/"
@@ -165,7 +179,8 @@
         android:id="@+id/btn_divide"
         android:layout_above="@+id/btn_multiply"
         android:layout_toRightOf="@+id/btn_6"
-        android:layout_toEndOf="@+id/btn_6" />
+        android:layout_toEndOf="@+id/btn_6"
+        android:onClick="OnClickSign" />
 
     <Button
         android:text="8"
@@ -174,6 +189,7 @@
         android:layout_height="75dp"
         android:layout_alignBottom="@+id/btn_7"
         android:layout_toRightOf="@+id/btn_7"
-        android:layout_toEndOf="@+id/btn_7" />
+        android:layout_toEndOf="@+id/btn_7"
+        android:onClick="OnClickNumber" />
 
 </RelativeLayout>
