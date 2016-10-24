@@ -7,11 +7,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 public class CalculatorActivity extends AppCompatActivity {
 
     String total_num = "";
     double value1, value2;
     String sign = "";
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
@@ -26,7 +29,7 @@ public class CalculatorActivity extends AppCompatActivity {
     }
 
     public void OnClickSign(View v){ //Función que almacena el primer valor en value1 y guarda el signo de la operación
-       value1 = Double.parseDouble(total_num);
+        value1 = Double.parseDouble(total_num);
         total_num = "";
         Button btn = (Button)v;
         String str = btn.getText().toString();
@@ -39,7 +42,8 @@ public class CalculatorActivity extends AppCompatActivity {
         TextView screen = (TextView) findViewById(R.id.screen);
         String str = screen.getText().toString();
         value2 = Double.parseDouble(str);
-        double result = 0.;
+        String s = "";
+        double result = 0;
         switch (sign){
             case "+" : result = value1 + value2;
                 break;
@@ -50,9 +54,24 @@ public class CalculatorActivity extends AppCompatActivity {
             case "/" : result = value1 / value2;
                 break;
         }
-        screen.setText(result + "");
-        //TODO: quan no poses un decimal que no et dongui un decimal
+        if(result%1==0){
+            int result_i = (int)result;
+            s = ""+result_i;
+        }
+        else{
+            s = Double.toString(result);
+        }
+        screen.setText(s);
+
     }
+
+    public void OnClear(View v){
+        TextView screen = (TextView) findViewById(R.id.screen);
+        screen.setText("");
+        total_num ="";
+    }
+
+
 
 
 

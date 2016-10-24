@@ -11,26 +11,18 @@
     tools:context="edu.upc.abh.calculator.CalculatorActivity">
 
     <TextView
-        android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/screen"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/btn_clr" />
+        android:textSize="36sp"
+        android:textColor="@android:color/black"
+        android:layout_toLeftOf="@+id/btn_clr"
+        android:layout_toStartOf="@+id/btn_clr"
+        android:layout_above="@+id/btn_7" />
 
-
-    <Button
-        android:text="CLR"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:id="@+id/btn_clr"
-        android:layout_alignBottom="@+id/btn_divide"
-        android:layout_toRightOf="@+id/btn_divide"
-        android:layout_alignParentEnd="true" />
 
     <Button
         android:text="."
@@ -191,5 +183,15 @@
         android:layout_toRightOf="@+id/btn_7"
         android:layout_toEndOf="@+id/btn_7"
         android:onClick="OnClickNumber" />
+
+    <Button
+        android:text="CLR"
+        android:layout_width="75dp"
+        android:layout_height="150dp"
+        android:id="@+id/btn_clr"
+        android:onClick="OnClear"
+        android:layout_above="@+id/btn_9"
+        android:layout_toRightOf="@+id/btn_9"
+        android:layout_toEndOf="@+id/btn_9" />
 
 </RelativeLayout>
