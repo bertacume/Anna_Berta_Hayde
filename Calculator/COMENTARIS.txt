@@ -1,0 +1,20 @@
+
+Coses bé:
+- Layout en cuadrícula.
+- Es poden fer càlculs.
+- Curiosament, en Java la operació "nombre_real % 1" funciona i dóna el resultat que toca, però
+  en C++ no funciona en absolut. M'ha sorprès molt perquè no se m'hagués acudit ni de bon tros.
+- El codi molt bé, curt i al gra, sense repeticions.
+
+Coses a millorar:
+- El layout no agafa l'amplada de la pantalla (potser en el que ho vau provar sí, però no en general).
+  Utilitzant un GridView es pot arreglar.
+- Quan tens un número com a resultat i tornes a fer una operació, agafa l'anterior,
+  no el que hi ha en pantalla:
+
+      5 x 5 = x 5
+
+  em dóna 25, no 125. Això té a veure que teniu value1 i value2, però en realitat només hi hauria
+  d'haver el "valor en memòria" i el que està a la pantalla (que es guarda solet). Quan apretes
+  una operació, el valor de la pantalla passa a la memòria i quan apretes "=" es fa la operació
+  entre els dos. Posant un sol "value" ja estaria, és fàcil d'arreglar.

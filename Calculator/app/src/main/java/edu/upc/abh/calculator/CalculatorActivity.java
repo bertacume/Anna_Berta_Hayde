@@ -25,7 +25,7 @@ public class CalculatorActivity extends AppCompatActivity {
         String str = btn.getText().toString();
         total_num += str;
         TextView screen = (TextView) findViewById(R.id.screen);
-        screen.setText(total_num + "");
+        screen.setText(total_num);
     }
 
     public void OnClickSign(View v){ //Función que almacena el primer valor en value1 y guarda el signo de la operación
@@ -54,21 +54,19 @@ public class CalculatorActivity extends AppCompatActivity {
             case "/" : result = value1 / value2;
                 break;
         }
-        if(result%1==0){
-            int result_i = (int)result;
-            s = ""+result_i;
-        }
-        else{
+        double resta = result % 1;
+        if (resta % 1 == 0) {
+            s = Integer.toString((int)result); // millor convertir així que sumant a un string.
+        } else {
             s = Double.toString(result);
         }
         screen.setText(s);
-
     }
 
-    public void OnClear(View v){
+    public void OnClear(View v) {
         TextView screen = (TextView) findViewById(R.id.screen);
         screen.setText("");
-        total_num ="";
+        total_num = "";
     }
 
 
