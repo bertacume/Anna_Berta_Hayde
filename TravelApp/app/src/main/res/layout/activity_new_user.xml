@@ -33,18 +33,6 @@
         android:layout_toEndOf="@+id/namelbl"
         android:layout_marginBottom="68dp" />
 
-    <TextView
-        android:text="Profile pic:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="53dp"
-        android:id="@+id/profilepiclbl"
-        android:textSize="18sp"
-        android:textColor="@android:color/black"
-        android:layout_below="@+id/emailTxt"
-        android:layout_alignLeft="@+id/emaillbl"
-        android:layout_alignStart="@+id/emaillbl" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,17 +44,6 @@
         android:layout_alignLeft="@+id/nameTxt"
         android:layout_alignStart="@+id/nameTxt"
         android:layout_marginRight="5dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:hint="password"
-        android:layout_below="@+id/emailTxt"
-        android:layout_alignLeft="@+id/emailTxt"
-        android:layout_alignStart="@+id/emailTxt"
-        android:id="@+id/passwordtxt" />
 
     <TextView
         android:text="Password:"
@@ -103,5 +80,50 @@
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/emaillbl"
         android:layout_alignEnd="@+id/emaillbl" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:hint="enter password"
+        android:id="@+id/passwordtxt"
+        android:layout_below="@+id/emailTxt"
+        android:layout_alignLeft="@+id/emailTxt"
+        android:layout_alignStart="@+id/emailTxt" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:layout_below="@+id/passwordtxt"
+        android:layout_alignRight="@+id/passwordtxt"
+        android:layout_alignEnd="@+id/passwordtxt"
+        android:id="@+id/confirmtxt"
+        android:hint="re-enter password" />
+
+    <TextView
+        android:text="Confirm:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/confirmpswrdlbl"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:layout_alignBaseline="@+id/confirmtxt"
+        android:layout_alignBottom="@+id/confirmtxt"
+        android:layout_alignLeft="@+id/passwordlbl"
+        android:layout_alignStart="@+id/passwordlbl" />
+
+    <TextView
+        android:text="Profile pic:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/profilepiclbl"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/namelbl"
+        android:layout_alignStart="@+id/namelbl" />
 
 </RelativeLayout>
