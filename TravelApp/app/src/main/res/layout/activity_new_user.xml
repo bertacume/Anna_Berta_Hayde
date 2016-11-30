@@ -24,10 +24,10 @@
         android:layout_marginRight="5dp" />
 
     <Button
-        android:text="creat new user"
+        android:text="create new user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/creatUserBtn"
+        android:id="@+id/createUserBtn"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/namelbl"
         android:layout_toEndOf="@+id/namelbl"

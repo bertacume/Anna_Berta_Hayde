@@ -19,7 +19,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".MapActivity" />
-        <activity android:name=".NewUserActivity"></activity>
+        <activity
+            android:name=".NewUserActivity">
+            <intent-filter>
+                <action android:name="upc.eet.pma.travelapp.NewUserActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

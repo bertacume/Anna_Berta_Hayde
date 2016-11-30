@@ -19,7 +19,7 @@ public class LogInActivity extends AppCompatActivity {
 
     private EditText mEmailField;
     private EditText mPasswordField;
-    private Button mLoginBtn;
+    private Button mLoginBtn,mNewUserBtn;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -34,6 +34,7 @@ public class LogInActivity extends AppCompatActivity {
         mEmailField = (EditText) findViewById(R.id.emailField);
         mPasswordField = (EditText) findViewById(R.id.passwordField);
         mLoginBtn = (Button) findViewById(R.id.loginBtn);
+        mNewUserBtn=(Button) findViewById(R.id.newuserBtn);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -50,7 +51,15 @@ public class LogInActivity extends AppCompatActivity {
                 startSignIn();
             }
         });
+        mNewUserBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent("upc.eet.pma.travelapp.NewUserActivity");
+                startActivity(i);
+            }
+        });
     }
+
 
     @Override
     protected void onStart() {
