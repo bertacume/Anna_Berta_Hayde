@@ -19,7 +19,7 @@ public class MapActivity extends AppCompatActivity {
         mProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent("upc.eet.pma.travelapp.NewUserActivity");
+                Intent i = new Intent("upc.eet.pma.travelapp.ProfileActivity");
                 startActivity(i);
             }
         });
