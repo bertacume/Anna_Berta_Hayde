@@ -1,0 +1,15 @@
+Peso en puntos de la nota de cada versión:
+
+   0.0 -> 2
+   0.1 -> 2
+   0.2 -> 2
+   0.3 -> 2
+   0.4 -> 2
+   0.5 -> 2
+
+(Los valores son aproximados, he optado por poner 
+ una nota más o menos homogénea porque faltaría
+ más detalle para poder estimar mejor.
+
+ Suma en total más de 10 así que podéis compensar
+ cosas que no salgan muy bien de la rúbrica)
