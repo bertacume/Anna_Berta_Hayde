@@ -53,7 +53,7 @@ public class NewUserActivity extends AppCompatActivity {
         String confirmpassword = mConfirmPassword.getText().toString();
 
         if(!password.equals(confirmpassword)){
-            Toast.makeText(NewUserActivity.this, "Password don't match", Toast.LENGTH_LONG).show();
+            Toast.makeText(NewUserActivity.this, "Passwords don't match", Toast.LENGTH_LONG).show();
         }
         else {
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

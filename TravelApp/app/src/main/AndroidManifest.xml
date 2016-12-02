@@ -18,15 +18,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MapActivity" />
-        <activity
-            android:name=".NewUserActivity">
+        <activity android:name=".MapActivity">
+            <intent-filter>
+                <action android:name="upc.eet.pma.travelapp.MapActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".NewUserActivity">
             <intent-filter>
                 <action android:name="upc.eet.pma.travelapp.NewUserActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>
