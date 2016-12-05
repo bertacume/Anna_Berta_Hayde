@@ -1,9 +1,20 @@
 <resources>
-    <string name="app_name">TravelApp</string>
+    <string name="app_name">Verkko</string>
     <string name="logout">Log out</string>
     <string name="username">Username</string>
     <string name="name">Name</string>
     <string name="location">Location</string>
     <string name="editprofile">Edit Profile</string>
     <string name="map">Map</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="new_user">New User</string>
+    <string name="log_in">Log In</string>
+    <string name="my_profile">My profile</string>
+    <string name="confirm">Confirm</string>
+    <string name="profile_pic">Profile Pic</string>
+    <string name="complete_name">Complete Name</string>
+    <string name="email_address">e-mail address</string>
+    <string name="enter_password">enter password</string>
+    <string name="reenter_password">re-enter password</string>
 </resources>
