@@ -105,7 +105,7 @@ public class LogInActivity extends AppCompatActivity {
                     Toast.makeText(LogInActivity.this, "Sign In Problem", Toast.LENGTH_LONG).show();
                 }
 
-                startActivity(new Intent("upc.eet.pma.travelapp.MapActivity"));
+
 
             }
         });
