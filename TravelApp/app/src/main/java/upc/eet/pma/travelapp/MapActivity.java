@@ -24,6 +24,13 @@ public class MapActivity extends AppCompatActivity {
             }
         });
 
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        return;
     }
 
 }

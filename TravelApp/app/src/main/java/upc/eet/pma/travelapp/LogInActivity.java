@@ -61,6 +61,9 @@ public class LogInActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
+                    Intent i = new Intent("upc.eet.pma.travelapp.MapActivity");
+                    startActivity(i);
+
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
