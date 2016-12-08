@@ -96,17 +96,6 @@
         android:layout_alignStart="@+id/passwordlbl" />
 
     <TextView
-        android:text="Profile pic:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/profilepiclbl"
-        android:textSize="18sp"
-        android:textColor="@android:color/black"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/namelbl"
-        android:layout_alignStart="@+id/namelbl" />
-
-    <TextView
         android:text="Password:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -123,10 +112,19 @@
     <Button
         android:text="create new user"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/createUserBtn"
-        android:layout_below="@+id/profilepiclbl"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="88dp" />
+        android:layout_marginTop="37dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/confirmtxt"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="BACK TO LOG IN"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="11dp"
+        android:id="@+id/backLoginBtn"
+        android:layout_below="@+id/createUserBtn"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

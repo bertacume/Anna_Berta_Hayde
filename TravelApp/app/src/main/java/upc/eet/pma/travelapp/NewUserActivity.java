@@ -12,20 +12,35 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class NewUserActivity extends AppCompatActivity {
 
-    private Button mNewUserBtn;
+    private static final String TAG ="" ;
+    private Button mNewUserBtn,mBackLog;
     private EditText mName;
     private EditText mEmail;
     private EditText mCreatePassword;
     private EditText mConfirmPassword;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference usersRef = mRef.child("Users");
+
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,17 +51,65 @@ public class NewUserActivity extends AppCompatActivity {
         mCreatePassword = (EditText) findViewById(R.id.passwordtxt);
         mConfirmPassword = (EditText) findViewById(R.id.confirmtxt);
         mAuth = FirebaseAuth.getInstance();
-
         mNewUserBtn = (Button) findViewById(R.id.createUserBtn);
+        mBackLog=(Button) findViewById(R.id.backLoginBtn);
+
+        mBackLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         mNewUserBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //saveNewUser();
+
                 startRegistration();
+
             }
         });
 
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    String userId=user.getUid();
+                    String name = mName.getText().toString();
+                    String email = mEmail.getText().toString();
+                    writeNewUser(userId,name,email);
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+                // ...
+            }
+
+        };
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+    private void writeNewUser(String userId, String name,String email) {
+        User user = new User(name,email);
+
+        mRef.child("Users").child(userId).setValue(user);
+    }
+
+
     private void startRegistration() {
         String email = mEmail.getText().toString();
         String password = mCreatePassword.getText().toString();
@@ -56,12 +119,18 @@ public class NewUserActivity extends AppCompatActivity {
             Toast.makeText(NewUserActivity.this, "Passwords don't match", Toast.LENGTH_LONG).show();
         }
         else {
-            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this,new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
+                    Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+
                     if (!task.isSuccessful()) {
                         Toast.makeText(NewUserActivity.this, "Registration Problem", Toast.LENGTH_LONG).show();
                     }
+                    Toast.makeText(NewUserActivity.this, "You can log in now", Toast.LENGTH_LONG).show();
+
                 }
             });
 

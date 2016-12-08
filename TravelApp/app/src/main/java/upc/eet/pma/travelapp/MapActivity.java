@@ -23,5 +23,7 @@ public class MapActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
     }
+
 }
