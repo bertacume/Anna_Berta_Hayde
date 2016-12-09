@@ -28,7 +28,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="27dp"
-        android:id="@+id/location_txt" />
+        android:id="@+id/locationTxt" />
 
     <Button
         android:text="log out"
@@ -45,7 +45,7 @@
         android:text="Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/location_txt"
+        android:layout_below="@+id/locationTxt"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="31dp"

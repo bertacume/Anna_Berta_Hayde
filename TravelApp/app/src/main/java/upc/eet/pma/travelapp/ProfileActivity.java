@@ -41,12 +41,6 @@ public class ProfileActivity extends AppCompatActivity {
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     DatabaseReference usersRef = mDatabase.child("Users");
 
-    private GoogleMap mMap;
-    private Marker marker;
-    double lat = 0.0;
-    double lng = 0.0;
-    private TextView location_txt;
-    private Button mRefresh;
 
 
     @Override
@@ -103,16 +97,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         };
 
-        location_txt = (TextView) findViewById(R.id.location_txt);
-        mRefresh = (Button) findViewById(R.id.refresh_btn);
-
-        mRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myLocation();
-            }
-        });
-
 
     }
 
@@ -139,61 +123,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
-    private void refreshLocation(Location location){
-        if(location!=null){
-            lat = location.getLatitude();
-            lng = location.getLongitude();
-            String lat_str = Double.toString(lat);
-            String lng_str = Double.toString(lng);
-            String latlng = lat_str + "," + lng_str;
-            location_txt.setText(latlng);
-        }
-        //else {location_txt.setText("0.0");}
-    }
 
-    /* LocationListener locationListener = new LocationListener() {
-        @Override
-        public void onLocationChanged(Location location) {
-            refreshLocation(location);
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-            Intent i = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(i);
-
-        }
-    }; */
-
-    private void myLocation(){
-
-        LocationManager locationManager = (LocationManager) this.getSystemService(android.content.Context.LOCATION_SERVICE);
-        List<String> providers = locationManager.getProviders(true);
-        Location bestLocation = null;
-        for (String provider : providers){
-            Location location = locationManager.getLastKnownLocation(provider);
-            if (location != null){
-                if (bestLocation == null || location.getAccuracy() < bestLocation.getAccuracy()){
-                    bestLocation = location;
-                }
-            }
-        }
-
-        refreshLocation(bestLocation);
-        //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-
-    }
 
 
 
