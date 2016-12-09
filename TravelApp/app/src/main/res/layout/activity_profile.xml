@@ -11,19 +11,44 @@
     tools:context="upc.eet.pma.travelapp.ProfileActivity">
 
     <TextView
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:id="@+id/userNametxt"
+        android:layout_width="wrap_content"
+        android:text="Username"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="141dp"
-        android:id="@+id/userNametxt" />
+        android:layout_below="@+id/userNametxt"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="27dp"
+        android:id="@+id/location_txt" />
 
     <Button
         android:text="log out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/userNametxt"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="94dp"
-        android:id="@+id/signoutBtn" />
+        android:id="@+id/signoutBtn"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/userNametxt"
+        android:layout_toEndOf="@+id/userNametxt"
+        android:layout_marginLeft="99dp"
+        android:layout_marginStart="99dp" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/location_txt"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="31dp"
+        android:id="@+id/refresh_btn" />
+
 </RelativeLayout>
