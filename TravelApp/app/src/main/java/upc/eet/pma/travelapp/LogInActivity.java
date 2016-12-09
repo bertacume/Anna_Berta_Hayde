@@ -73,7 +73,10 @@ public class LogInActivity extends AppCompatActivity {
         };
     }
 
-
+    @Override
+    public void onBackPressed() {
+        return;
+    }
     @Override
     protected void onStart() {
         super.onStart();

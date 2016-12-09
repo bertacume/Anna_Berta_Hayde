@@ -10,31 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="upc.eet.pma.travelapp.NewUserActivity">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/nameTxt"
-        android:hint="Nombre completo"
-        android:layout_alignBaseline="@+id/namelbl"
-        android:layout_alignBottom="@+id/namelbl"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="5dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/emailTxt"
-        android:hint="e-mail address"
-        android:layout_below="@+id/nameTxt"
-        android:layout_alignLeft="@+id/nameTxt"
-        android:layout_alignStart="@+id/nameTxt"
-        android:layout_marginRight="5dp" />
-
     <TextView
         android:text="E-mail:"
         android:layout_width="wrap_content"
@@ -62,18 +37,7 @@
         android:layout_marginLeft="20dp" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:hint="enter password"
-        android:id="@+id/passwordtxt"
-        android:layout_below="@+id/emailTxt"
-        android:layout_alignLeft="@+id/emailTxt"
-        android:layout_alignStart="@+id/emailTxt" />
-
-    <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
@@ -81,7 +45,9 @@
         android:layout_alignRight="@+id/passwordtxt"
         android:layout_alignEnd="@+id/passwordtxt"
         android:id="@+id/confirmtxt"
-        android:hint="re-enter password" />
+        android:hint="re-enter pswrd"
+        android:layout_alignLeft="@+id/passwordtxt"
+        android:layout_alignStart="@+id/passwordtxt" />
 
     <TextView
         android:text="Confirm:"
@@ -126,5 +92,45 @@
         android:id="@+id/backLoginBtn"
         android:layout_below="@+id/createUserBtn"
         android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:hint="enter password"
+        android:id="@+id/passwordtxt"
+        android:layout_below="@+id/emailTxt"
+        android:layout_alignLeft="@+id/nameTxt"
+        android:layout_alignStart="@+id/nameTxt"
+        android:layout_alignRight="@+id/nameTxt"
+        android:layout_alignEnd="@+id/nameTxt" />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/emailTxt"
+        android:hint="e-mail address"
+        android:layout_below="@+id/nameTxt"
+        android:layout_alignLeft="@+id/passwordtxt"
+        android:layout_alignStart="@+id/passwordtxt"
+        android:layout_alignRight="@+id/nameTxt"
+        android:layout_alignEnd="@+id/nameTxt" />
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/nameTxt"
+        android:hint="Full name"
+        android:layout_alignBaseline="@+id/namelbl"
+        android:layout_alignBottom="@+id/namelbl"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_width="160dp" />
 
 </RelativeLayout>

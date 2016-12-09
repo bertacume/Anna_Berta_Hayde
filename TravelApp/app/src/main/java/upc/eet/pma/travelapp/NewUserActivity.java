@@ -111,12 +111,16 @@ public class NewUserActivity extends AppCompatActivity {
 
 
     private void startRegistration() {
+        String name = mName.getText().toString();
         String email = mEmail.getText().toString();
         String password = mCreatePassword.getText().toString();
         String confirmpassword = mConfirmPassword.getText().toString();
 
         if(!password.equals(confirmpassword)){
             Toast.makeText(NewUserActivity.this, "Passwords don't match", Toast.LENGTH_LONG).show();
+        }
+        if(TextUtils.isEmpty(email)||TextUtils.isEmpty(password)||TextUtils.isEmpty(confirmpassword)||TextUtils.isEmpty(name)){
+            Toast.makeText(NewUserActivity.this, "Fields are empty", Toast.LENGTH_LONG).show();
         }
         else {
 
@@ -125,6 +129,7 @@ public class NewUserActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+
 
                     if (!task.isSuccessful()) {
                         Toast.makeText(NewUserActivity.this, "Registration Problem", Toast.LENGTH_LONG).show();
