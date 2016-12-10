@@ -9,7 +9,19 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="upc.eet.pma.travelapp.MapActivity">
+    <LinearLayout
+        android:id="@+id/map_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:id="@+id/map"
+            />
+    </LinearLayout>
     <RelativeLayout
         android:id="@+id/optionsLayout"
         android:layout_width="match_parent"
@@ -41,4 +53,8 @@
         android:layout_marginStart="116dp"
         android:layout_marginTop="71dp"
         android:id="@+id/locationTxt" />
+
+
+
+
 </RelativeLayout>

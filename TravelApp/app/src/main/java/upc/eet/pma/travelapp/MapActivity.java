@@ -1,20 +1,30 @@
 package upc.eet.pma.travelapp;
 
+import android.support.v4.app.FragmentActivity;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
-public class MapActivity extends AppCompatActivity {
+public class MapActivity extends FragmentActivity implements OnMapReadyCallback  {
     private Button mProfileBtn;
     private GoogleMap mMap;
     private Marker marker;
@@ -28,6 +38,7 @@ public class MapActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        initMap();
 
         mProfileBtn = (Button) findViewById(R.id.ProfileBtn);
 
@@ -42,15 +53,7 @@ public class MapActivity extends AppCompatActivity {
         location_txt = (TextView) findViewById(R.id.locationTxt);
         myLocation();
 
-       /* mLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                travellerLocation actualLocation = new travellerLocation();
-                String locationString = actualLocation.LocationToString();
-                location_txt.setText(locationString);
-            }
-        }); */
 
 
     }
@@ -78,6 +81,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
 
+
     private void myLocation() {
 
         LocationManager locationManager = (LocationManager) this.getSystemService(android.content.Context.LOCATION_SERVICE);
@@ -93,10 +97,45 @@ public class MapActivity extends AppCompatActivity {
         }
 
         LocationToString(bestLocation);
-    }
-}
         //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
         //return bestLocation;
+    }
+
+
+
+    public void initMap() {
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+
+
+    /*@Override
+    public void onMapReady(GoogleMap googleMap) {
+       try {
+            if (googleMap != null) {
+                mMap = googleMap;
+                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("ERROR", "GOOGLE MAPS NOT LOADED");
+        }
+    }*/
+
+}
+
 
 
 
