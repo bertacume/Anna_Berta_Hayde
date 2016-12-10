@@ -18,6 +18,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -51,11 +52,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         });
 
         location_txt = (TextView) findViewById(R.id.locationTxt);
-        myLocation();
-
-
-
-
     }
 
     @Override
@@ -80,7 +76,24 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         //return "0.0";
     }
 
-
+    private void addMarker(double lat, double lng){
+        LatLng coordinates = new LatLng(lat,lng);
+        CameraUpdate my_Location = CameraUpdateFactory.newLatLngZoom(coordinates,16);
+        if (marker != null) marker.remove();
+        MarkerOptions options = new MarkerOptions()
+                .position(coordinates)
+                .title("I am here!")
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+        mMap.addMarker(options);
+        mMap.animateCamera(my_Location);
+    }
+    private void refreshLocation(Location location){
+        if(location!=null){
+            lat = location.getLatitude();
+            lng = location.getLongitude();
+        }
+        addMarker(lat,lng);
+    }
 
     private void myLocation() {
 
@@ -95,8 +108,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 }
             }
         }
-
-        LocationToString(bestLocation);
+        refreshLocation(bestLocation);
         //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
         //return bestLocation;
     }
@@ -112,11 +124,13 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        myLocation();
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
+        /* LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
+
     }
 
 
