@@ -1,26 +1,27 @@
 package upc.eet.pma.travelapp;
 
+
 import android.*;
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.firebase.client.Firebase;
-import com.firebase.client.core.Context;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.Marker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,17 +30,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
 import java.util.List;
+import java.util.Locale;
 
 
 public class ProfileActivity extends AppCompatActivity {
     private static final String TAG = "";
-    private TextView mUserName;
+    private TextView mUserName,mlocationTxt;
     private Button msignOut;
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authListener;
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     DatabaseReference usersRef = mDatabase.child("Users");
+    private static final int MY_PERMISION_REQUEST_LOCATION=1;
 
 
 
@@ -47,6 +51,37 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        mlocationTxt = (TextView) findViewById(R.id.locationTxt);
+        //mlocationTxt.setText("holaaa");
+
+        if(ContextCompat.checkSelfPermission(ProfileActivity.this,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(ProfileActivity.this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION)){
+                ActivityCompat.requestPermissions(ProfileActivity.this,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},MY_PERMISION_REQUEST_LOCATION);
+            }
+            else{
+                ActivityCompat.requestPermissions(ProfileActivity.this,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},MY_PERMISION_REQUEST_LOCATION);
+            }
+
+        }else{
+            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            Location location =locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            try{
+                mlocationTxt.setText(hereLocation(location.getLatitude(),location.getLongitude()));
+            }catch (Exception e){
+                e.printStackTrace();
+                Toast.makeText(ProfileActivity.this,"Not found",Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+
+
+
+
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String userId = user.getUid();
 
@@ -97,8 +132,50 @@ public class ProfileActivity extends AppCompatActivity {
             }
         };
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+       switch (requestCode){
+           case MY_PERMISION_REQUEST_LOCATION:{
+               if(grantResults.length>0&& grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                 if(ContextCompat.checkSelfPermission(ProfileActivity.this,
+                         Manifest.permission.ACCESS_COARSE_LOCATION)==PackageManager.PERMISSION_GRANTED){
+                     LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                     Location location =locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                     try{
+                         mlocationTxt.setText(hereLocation(location.getLatitude(),location.getLongitude()));
+                     }catch (Exception e){
+                         e.printStackTrace();
+                         Toast.makeText(ProfileActivity.this,"Not found",Toast.LENGTH_SHORT).show();
+                     }
+                 }
+               }else{
+                   Toast.makeText(ProfileActivity.this,"Not permission granted",Toast.LENGTH_SHORT).show();
+               }
+           }
+       }
+
+
 
     }
+
+    public String hereLocation(double lat, double lon){
+        String curCity = "";
+        Geocoder geocoder =new Geocoder(ProfileActivity.this, Locale.getDefault());
+        List<Address> addressList;
+        try{
+            addressList = geocoder.getFromLocation(lat,lon,1);
+            if(addressList.size()>0){
+                curCity=addressList.get(0).getLocality();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return curCity;
+    }
+
+
 
     private void signOut() {
         auth.signOut();
