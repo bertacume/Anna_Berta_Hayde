@@ -110,7 +110,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         }
         refreshLocation(bestLocation);
         //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-        //return bestLocation;
     }
 
 
