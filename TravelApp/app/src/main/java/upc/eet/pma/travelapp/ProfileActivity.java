@@ -70,7 +70,7 @@ public class ProfileActivity extends AppCompatActivity {
             LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             Location location =locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             try{
-                mlocationTxt.setText(hereLocation(location.getLatitude(),location.getLongitude()));
+                mlocationTxt.setText(hereLocation(location.getLatitude(),location.getLongitude()));/////////////////////////here
             }catch (Exception e){
                 e.printStackTrace();
                 Toast.makeText(ProfileActivity.this,"Not found",Toast.LENGTH_SHORT).show();
@@ -144,7 +144,7 @@ public class ProfileActivity extends AppCompatActivity {
                      LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                      Location location =locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                      try{
-                         mlocationTxt.setText(hereLocation(location.getLatitude(),location.getLongitude()));
+                         mlocationTxt.setText(hereLocation(location.getLatitude(),location.getLongitude()));///////////////////////////////////hereLocation
                      }catch (Exception e){
                          e.printStackTrace();
                          Toast.makeText(ProfileActivity.this,"Not found",Toast.LENGTH_SHORT).show();
@@ -167,13 +167,16 @@ public class ProfileActivity extends AppCompatActivity {
         try{
             addressList = geocoder.getFromLocation(lat,lon,1);
             if(addressList.size()>0){
-                curCity=addressList.get(0).getLocality();
+                curCity=addressList.get(0).getLocality()+ ", ";//para retornar el estado (USA) usar getAdminArea()
+                curCity += addressList.get(0).getAddressLine(2)+", "; //en el caso de España esta linea regresa la provincia
+                curCity += addressList.get(0).getCountryName();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return curCity;
     }
+
 
 
 
