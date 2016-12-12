@@ -107,6 +107,9 @@ public class ProfileActivity extends AppCompatActivity {
                 }
         );
 
+        String uLocation = mlocationTxt.getText().toString();
+        usersRef.child(userId).child("ulocation").setValue(uLocation);
+
 
 
         msignOut = (Button)findViewById(R.id.signoutBtn);
@@ -161,7 +164,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public String hereLocation(double lat, double lon){
-        String curCity = "";
+        String curCity="";
         Geocoder geocoder =new Geocoder(ProfileActivity.this, Locale.getDefault());
         List<Address> addressList;
         try{

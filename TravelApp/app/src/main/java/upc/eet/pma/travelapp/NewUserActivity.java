@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class NewUserActivity extends AppCompatActivity {
 
@@ -79,7 +80,13 @@ public class NewUserActivity extends AppCompatActivity {
                     String userId=user.getUid();
                     String name = mName.getText().toString();
                     String email = mEmail.getText().toString();
-                    writeNewUser(userId,name,email);
+                    String ulocation="";
+                    Map<String,Object> friendList= new TreeMap<String,Object>();
+
+                   // String friendsList="";
+                    boolean isFantasma = false;
+
+                    writeNewUser(userId,name,email,ulocation,isFantasma,friendList);
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
@@ -103,10 +110,11 @@ public class NewUserActivity extends AppCompatActivity {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
-    private void writeNewUser(String userId, String name,String email) {
-        User user = new User(name,email);
+    private void writeNewUser(String userId, String name,String email,String ulocation ,boolean isFantasma, Map<String,Object> friendList) {
 
+        User user = new User(name,email,ulocation,isFantasma,friendList);
         mRef.child("Users").child(userId).setValue(user);
+
     }
 
 
