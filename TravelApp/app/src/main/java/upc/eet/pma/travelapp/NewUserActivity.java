@@ -81,12 +81,12 @@ public class NewUserActivity extends AppCompatActivity {
                     String name = mName.getText().toString();
                     String email = mEmail.getText().toString();
                     String ulocation="";
-                    Map<String,Object> friendList= new TreeMap<String,Object>();
+                   // Map<String,Object> friendList= new TreeMap<String,Object>();
 
                    // String friendsList="";
                     boolean isFantasma = false;
 
-                    writeNewUser(userId,name,email,ulocation,isFantasma,friendList);
+                    writeNewUser(userId,name,email,ulocation,isFantasma);
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
@@ -110,11 +110,23 @@ public class NewUserActivity extends AppCompatActivity {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
-    private void writeNewUser(String userId, String name,String email,String ulocation ,boolean isFantasma, Map<String,Object> friendList) {
+    private void writeNewUser(String userId, String name,String email,String ulocation ,boolean isFantasma) {
 
-        User user = new User(name,email,ulocation,isFantasma,friendList);
-        mRef.child("Users").child(userId).setValue(user);
+        //User user = new User(name,email,ulocation,isFantasma,friendList);
+        //mRef.child("Users").child(userId).setValue(user);
 
+        // Create new post at /user-posts/$userid/$postid and at
+        // /posts/$postid simultaneously
+        //String key = mRef.child("Users").push().getKey();
+        User user = new User(name, email, ulocation,isFantasma);
+        Map<String, Object> postValues = user.toMap();
+        //Map<String, String> friendsList = new HashMap<>();
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/Users/" + userId, postValues);
+       // childUpdates.put("/Users/"+userId+ "/friendsList/"+"/" + key, postValues);
+
+        mRef.updateChildren(childUpdates);
     }
 
 
