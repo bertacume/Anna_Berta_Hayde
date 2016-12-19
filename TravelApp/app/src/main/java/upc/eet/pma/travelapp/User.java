@@ -40,6 +40,10 @@ public class User {
         friendsList.remove(uidFriend);
     }
 
+    public void follow(String uidFriend){
+        friendsList.put(uidFriend,true);
+    }
+
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();

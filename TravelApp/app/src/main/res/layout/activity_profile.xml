@@ -31,14 +31,22 @@
         android:id="@+id/locationTxt" />
 
     <Button
+        android:text="@string/editprofile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:id="@+id/editProfileBtn"
+        android:layout_below="@+id/locationTxt"
+        android:layout_centerHorizontal="true" />
+
+    <Button
         android:text="log out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/signoutBtn"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/userNametxt"
-        android:layout_toEndOf="@+id/userNametxt"
-        android:layout_marginLeft="99dp"
-        android:layout_marginStart="99dp" />
+        android:layout_alignBaseline="@+id/userNametxt"
+        android:layout_alignBottom="@+id/userNametxt"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

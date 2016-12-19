@@ -3,11 +3,10 @@
     package="upc.eet.pma.travelapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-    <uses-permission android:name="android.permission.READ_LOGS"/>
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
 
     <application
         android:name=".TravelApp"
@@ -23,17 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-
-            android:name=".MapActivity" android:noHistory = "true">
-
+            android:name=".MapActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="upc.eet.pma.travelapp.MapActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
         </activity>
         <activity android:name=".NewUserActivity">
             <intent-filter>
@@ -54,6 +50,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC95o-DJzoC2yxBjWQ-_ACk2KKeKAAhTZA" />
 
+        <activity android:name=".EditProfileActivity"></activity>
     </application>
 
 </manifest>

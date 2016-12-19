@@ -38,7 +38,7 @@ import java.util.Locale;
 public class ProfileActivity extends AppCompatActivity {
     private static final String TAG = "";
     private TextView mUserName,mlocationTxt;
-    private Button msignOut;
+    private Button msignOut,meditProfile;
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authListener;
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -110,8 +110,15 @@ public class ProfileActivity extends AppCompatActivity {
         String uLocation = mlocationTxt.getText().toString();
         usersRef.child(userId).child("ulocation").setValue(uLocation);
 
+        meditProfile =(Button) findViewById(R.id.editProfileBtn);
+        meditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                startActivity(new Intent(ProfileActivity.this, EditProfileActivity.class));
 
+            }
+        });
         msignOut = (Button)findViewById(R.id.signoutBtn);
 
         msignOut.setOnClickListener(new View.OnClickListener() {
