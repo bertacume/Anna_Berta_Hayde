@@ -27,6 +27,7 @@ import java.util.List;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback  {
     private Button mProfileBtn;
+    private Button mSearchBtn;
     private GoogleMap mMap;
     private Marker marker;
     private TextView location_txt;
@@ -42,12 +43,21 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         initMap();
 
         mProfileBtn = (Button) findViewById(R.id.ProfileBtn);
-
         mProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent("upc.eet.pma.travelapp.ProfileActivity");
                 startActivity(i);
+            }
+        });
+
+        mSearchBtn = (Button) findViewById(R.id.SearchBtn);
+        mSearchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent("upc.eet.pma.travelapp.SearchActivity");
+                startActivity(i);
+
             }
         });
 

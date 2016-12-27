@@ -17,4 +17,10 @@
     <string name="email_address">e-mail address</string>
     <string name="enter_password">enter password</string>
     <string name="reenter_password">re-enter password</string>
+    <string-array name="array_try">
+        <item>Barcelona</item>
+        <item>geudc</item>
+        <item>kk</item>
+        <item>hh</item>
+    </string-array>
 </resources>
