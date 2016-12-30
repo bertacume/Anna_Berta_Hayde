@@ -1,5 +1,6 @@
 package upc.eet.pma.travelapp;
 
+import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.renderscript.Sampler;
@@ -10,11 +11,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.firebase.client.Firebase;
@@ -36,11 +39,12 @@ import java.util.Map;
 
 public class SearchActivity extends AppCompatActivity  {
 
-    FirebaseDatabase usersDatabase;
-    DatabaseReference usersDatabaseReference;
-    ArrayList userList;
+    private FirebaseDatabase usersDatabase;
+    private DatabaseReference usersDatabaseReference;
+    private ArrayList userList;
+    //private User value;
 
-    ArrayAdapter adapter;
+    private ArrayAdapter adapter;
     private  ListView mListView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,22 @@ public class SearchActivity extends AppCompatActivity  {
         usersDatabase = FirebaseDatabase.getInstance();
         usersDatabaseReference = usersDatabase.getReference("Users");
         addValueEventListener(usersDatabaseReference);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View item, int pos, long id) {
+                Toast.makeText(SearchActivity.this, String.format("'%s' Profile", userList.get(pos)), Toast.LENGTH_SHORT
+                ).show();
+                Intent i = new Intent("upc.eet.pma.travelapp.FriendActivity");
+                String id_pos = Integer.toString(pos);
+                /*Toast.makeText(SearchActivity.this, String.format("Has fet click a '%s'", id_pos), Toast.LENGTH_SHORT
+                ).show();*/
+                //String id_pos = userList.get(pos).toString();
+                i.putExtra("id_pos", id_pos);
+                i.putExtra("userList", userList);
+                startActivity(i);
+            }
+        });
 
     }
 
