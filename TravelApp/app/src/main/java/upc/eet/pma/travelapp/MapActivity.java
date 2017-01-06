@@ -28,6 +28,7 @@ import java.util.List;
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback  {
     private Button mProfileBtn;
     private Button mSearchBtn;
+    private Button mRequestsBtn;
     private GoogleMap mMap;
     private Marker marker;
     private TextView location_txt;
@@ -60,6 +61,16 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
             }
         });
+
+        /*mRequestsBtn = (Button) findViewById(R.id.RequestsBtn);
+        mRequestsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent("upc.eet.pma.travelapp.RequestsActivity");
+                startActivity(i);
+
+            }
+        });*/
 
         location_txt = (TextView) findViewById(R.id.locationTxt);
     }

@@ -39,7 +39,7 @@ public class User {
     public void stopFollowing(String uidFriend){
         friendsList.remove(uidFriend);
     }
-
+    //Seguir: Agregar al contacto a tu lista de amigos
     public void follow(String uidFriend){
         friendsList.put(uidFriend,true);
     }
