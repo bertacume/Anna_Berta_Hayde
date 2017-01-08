@@ -62,7 +62,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             }
         });
 
-        /*mRequestsBtn = (Button) findViewById(R.id.RequestsBtn);
+        mRequestsBtn = (Button) findViewById(R.id.RequestsBtn);
         mRequestsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +70,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 startActivity(i);
 
             }
-        });*/
+        });
 
         location_txt = (TextView) findViewById(R.id.locationTxt);
     }

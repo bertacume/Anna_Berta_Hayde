@@ -54,6 +54,14 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".RequestsActivity">
+            <intent-filter>
+                <action android:name="upc.eet.pma.travelapp.RequestsActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".FriendActivity">
             <intent-filter>
                 <action android:name="upc.eet.pma.travelapp.FriendActivity" />
