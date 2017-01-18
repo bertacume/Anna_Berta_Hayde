@@ -1,7 +1,9 @@
 package upc.eet.pma.travelapp;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
@@ -32,9 +34,7 @@ public class FriendActivity extends AppCompatActivity {
     private String id_pos;
     private ToggleButton Follow;
     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference usersRef = mRef.child("Users");
-    DatabaseReference friendsRef = mRef.child("users").child("friendsList");
-    public Map<String,Boolean> friendsList = new TreeMap<>();
+    DatabaseReference friendsRef = mRef.child("Users").child("friendsList");
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -67,10 +67,19 @@ public class FriendActivity extends AppCompatActivity {
   //Eliminar al contacto de tu lista de amigos
     public void stopFollowing(final String uidFriend){
         friendsRef.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //Aquí hi ha l'error
-                friendsList.remove(uidFriend);
+
+                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                final String userId = user.getUid();
+                //String key = mRef.child("Users").push().getKey();
+                Map<String, String> friendsList = new HashMap<>();
+                friendsList.remove("hola");
+                Map<String, Object> childUpdates = new HashMap<>();
+                childUpdates.put("/Users/"+userId+ "/friendsList/"+"/", friendsList);
+                mRef.updateChildren(childUpdates);
+
                 Log.v("Removed", uidFriend);
             }
             @Override
@@ -85,9 +94,16 @@ public class FriendActivity extends AppCompatActivity {
         friendsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //Aquí hi ha l'error
-                friendsList.put(uidFriend,true);
-                //friendsRef.push().setValue(uidFriend);
+
+                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                final String userId = user.getUid();
+                //String key = mRef.child("Users").push().getKey();
+                Map<String, String> friendsList = new HashMap<>();
+                friendsList.put("hola","prova");
+                Map<String, Object> childUpdates = new HashMap<>();
+                childUpdates.put("/Users/"+userId+ "/friendsList/"+"/", friendsList);
+                mRef.updateChildren(childUpdates);
+
                 Log.v("Added", uidFriend);
             }
             @Override
@@ -95,18 +111,3 @@ public class FriendActivity extends AppCompatActivity {
             }
         });
     }}
-
-//Coses que he provat
-//final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//final String userId = user.getUid();
-//usersRef.child("friendsList").push().setValue(user_email);
-//mRef.child("users").child("friendsList");
-//String key = mRef.child("Users").push().getKey();
-//Map<String, Object> childUpdates = new HashMap<>();
-//Map<String, Object> postValues = user.toMap();
-// childUpdates.put("/Users/" + userId, postValues);
-// childUpdates.put("/Users/"+myuserUid+"/friendsList/"+"/" + key, id_);
-// childUpdates.put("/Users/" + myuserUid +"/friendsList/", id_);
-//mRef.child("/Users/" + userId +"/friendsList/").push().setValue(user_email);
-//mRef.updateChildren (childUpdates);
-//mRef.push("/Users/"+ myuserUid + "/friendsList/").setValue(id_pos);
