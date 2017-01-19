@@ -97,8 +97,8 @@ public class SearchActivity extends AppCompatActivity  {
                 Iterator<DataSnapshot> iterator = snapshotIterator.iterator();
                 while (iterator.hasNext()){
                     DataSnapshot data = iterator.next();
-                    Object email = data.child("email").getValue();
-                    // User value = data.getValue(User.class);
+                    Object email = data.child("Uid_").getValue();
+                                 // User value = data.getValue(User.class);
                     userList.add((String)email);
                 }
                 adapter = new ArrayAdapter<>(

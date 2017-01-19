@@ -16,6 +16,7 @@ public class User {
     public String ulocation; //Ciudad,Pais
     public Map<String,Boolean> friendsList = new TreeMap<>(); //String: uid, boolean : ?
     public boolean isFantasma;
+    public String Uid_;
 
 
     public User() {
@@ -23,12 +24,13 @@ public class User {
     }
 
     //constructor:
-    public User(String full_name,String email,String ulocation,boolean isFantasma) {
+    public User(String full_name,String email,String ulocation,boolean isFantasma,String Uid_) {
 
         this.full_name = full_name;
         this.email = email;
         this.ulocation = ulocation;
         this.isFantasma = isFantasma; // predeterminado como falso, es decir si muestra su ubicacion
+        this.Uid_ = Uid_;
     }
     //Activa el modo fantasma a true : este modo hace que no se muestre la ubicacion del usuario
     public void setModoFantasma(){
@@ -54,6 +56,7 @@ public class User {
         result.put("ulocation", ulocation);
         result.put("isFantasma", isFantasma);
         result.put("friendsList", friendsList);
+        result.put("Uid_", Uid_);
 
 
 
