@@ -26,10 +26,12 @@ public class SearchActivity extends AppCompatActivity  {
 
     private FirebaseDatabase usersDatabase;
     private DatabaseReference usersDatabaseReference;
-    private ArrayList userList;
+    private ArrayList<Category> userList;
+    int i = 0;
+    //private FirebaseListAdapter firebaseListAdapter;
     //private User value;
 
-    private ArrayAdapter adapter;
+    private AdapterCategory adapter;
     private  ListView mListView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,22 @@ public class SearchActivity extends AppCompatActivity  {
         usersDatabase = FirebaseDatabase.getInstance();
         usersDatabaseReference = usersDatabase.getReference("Users");
         addValueEventListener(usersDatabaseReference);
+
+        /*
+        firebaseListAdapter = new FirebaseListAdapter<String>(
+                this,
+                String.class,
+                android.R.layout.simple_list_item_1,
+                usersDatabaseReference
+        ) {
+            @Override
+            protected void populateView(View v, String model, int position) {
+
+                TextView textView = (TextView) v.findViewById(android.R.id.text1);
+                textView.setText(model);
+
+            }
+        }; */
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -78,7 +96,8 @@ public class SearchActivity extends AppCompatActivity  {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
+                //firebaseListAdapter.notifyDataSetChanged(newText);
+                //adapter.getFilter().filter(newText);
 
                 return false;
             }
@@ -97,13 +116,16 @@ public class SearchActivity extends AppCompatActivity  {
                 Iterator<DataSnapshot> iterator = snapshotIterator.iterator();
                 while (iterator.hasNext()){
                     DataSnapshot data = iterator.next();
-                    Object email = data.child("Uid_").getValue();
+                    Object email = data.child("email").getValue();
+                    Object Uid_ = data.child("Uid_").getValue();
                                  // User value = data.getValue(User.class);
-                    userList.add((String)email);
+                    //userList.add((String)email);
+                    String S_email = email.toString();
+                    String S_Uid_ = Uid_.toString();
+                    userList.add(new Category(i++, S_email, S_Uid_));
                 }
-                adapter = new ArrayAdapter<>(
+                adapter = new AdapterCategory(
                         SearchActivity.this,
-                        android.R.layout.simple_list_item_1,
                         userList);
                 mListView.setAdapter(adapter);
             }
