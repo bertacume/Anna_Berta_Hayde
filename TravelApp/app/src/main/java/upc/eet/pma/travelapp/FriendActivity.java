@@ -36,6 +36,7 @@ public class FriendActivity extends AppCompatActivity {
     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference friendsRef = mRef.child("Users").child("friendsList");
     private ArrayList<Category> userList;
+    private String Clau;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class FriendActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     // Botón encendido
-                    follow(user_email);
+                    follow(user_email, user_uid);
                     Toast.makeText(FriendActivity.this, String.format("Following '%s'", user_email), Toast.LENGTH_SHORT).show();
                 } else {
                     // Botón apagado
@@ -66,50 +67,55 @@ public class FriendActivity extends AppCompatActivity {
             }
         });}
 
-  //Eliminar al contacto de tu lista de amigos
-    public void stopFollowing(final String uidFriend){
+
+    //Agregar al contacto a tu lista de amigos
+    public void follow(final String userEmail, final String userId){
+        friendsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                final String currentuserId = user.getUid();
+                String key = mRef.child("Users").push().getKey();
+                Map<String, String> friendsList = new HashMap<>();
+                friendsList.put("Id_friend",userId);
+                Map<String, Object> childUpdates = new HashMap<>();
+                childUpdates.put("/Users/"+currentuserId+ "/friendsList/"+"/" + key, friendsList);
+                mRef.updateChildren(childUpdates);
+
+                Clau = key;
+
+                Log.v("Added", userEmail);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });}
+
+
+    //Eliminar al contacto de tu lista de amigos
+    public void stopFollowing(final String userEmail){
         friendsRef.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                final String userId = user.getUid();
-                //String key = mRef.child("Users").push().getKey();
+                final String currentuserId = user.getUid();
+
+                String key2 = Clau;
+                friendsRef.child(key2).removeValue();
+
                 Map<String, String> friendsList = new HashMap<>();
-                friendsList.remove("hola");
+                friendsList.remove(key2);
                 Map<String, Object> childUpdates = new HashMap<>();
-                childUpdates.put("/Users/"+userId+ "/friendsList/"+"/", friendsList);
+                childUpdates.put("/Users/"+currentuserId+ "/friendsList/"+"/" + key2, friendsList);
                 mRef.updateChildren(childUpdates);
 
-                Log.v("Removed", uidFriend);
+                Log.v("Removed", userEmail);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
-        });
-
-    }
-
-    //Agregar al contacto a tu lista de amigos
-    public void follow(final String uidFriend){
-        friendsRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                final String userId = user.getUid();
-                //String key = mRef.child("Users").push().getKey();
-                Map<String, String> friendsList = new HashMap<>();
-                friendsList.put("hola","prova");
-                Map<String, Object> childUpdates = new HashMap<>();
-                childUpdates.put("/Users/"+userId+ "/friendsList/"+"/", friendsList);
-                mRef.updateChildren(childUpdates);
-
-                Log.v("Added", uidFriend);
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }}
+        });}
+}
