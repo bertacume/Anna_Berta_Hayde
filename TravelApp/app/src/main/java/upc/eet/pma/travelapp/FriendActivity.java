@@ -35,6 +35,7 @@ public class FriendActivity extends AppCompatActivity {
     private ToggleButton Follow;
     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference friendsRef = mRef.child("Users").child("friendsList");
+    private ArrayList<Category> userList;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -43,9 +44,10 @@ public class FriendActivity extends AppCompatActivity {
 
         id_pos = getIntent().getExtras().getString("id_pos");
         final int id_ = Integer.parseInt(id_pos);
-        ArrayList<String> userList = (ArrayList<String>) getIntent().getSerializableExtra("userList");
+        userList = (ArrayList<Category>) getIntent().getSerializableExtra("userList");
         user_emailuser = (TextView) findViewById(R.id.useremail_txt);
-        final String user_email = userList.get(id_);
+        final String user_email = userList.get(id_).getName(); //user_email és l'email de l'amic seleccionat
+        final String user_uid = userList.get(id_).getDescription(); //user_uid és l'uid de l'amic seleccionat
         user_emailuser.setText(user_email);
 
         Follow = (ToggleButton) findViewById(R.id.FollowBtn);

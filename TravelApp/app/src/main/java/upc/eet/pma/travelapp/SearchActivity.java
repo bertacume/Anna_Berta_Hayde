@@ -64,16 +64,20 @@ public class SearchActivity extends AppCompatActivity  {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View item, int pos, long id) {
-                Toast.makeText(SearchActivity.this, String.format("'%s' Profile", userList.get(pos)), Toast.LENGTH_SHORT
-                ).show();
+                Toast.makeText(SearchActivity.this, String.format("'%s' Profile",
+                        userList.get(pos).getName()), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SearchActivity.this, String.format("'%s' Profile", userList.get(pos).getDescription()), Toast.LENGTH_SHORT).show();
+
                 Intent i = new Intent("upc.eet.pma.travelapp.FriendActivity");
                 String id_pos = Integer.toString(pos);
                 /*Toast.makeText(SearchActivity.this, String.format("Has fet click a '%s'", id_pos), Toast.LENGTH_SHORT
                 ).show();*/
                 //String id_pos = userList.get(pos).toString();
+
                 i.putExtra("id_pos", id_pos);
                 i.putExtra("userList", userList);
                 startActivity(i);
+
             }
         });
 
