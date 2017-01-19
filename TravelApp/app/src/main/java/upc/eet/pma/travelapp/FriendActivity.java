@@ -78,7 +78,7 @@ public class FriendActivity extends AppCompatActivity {
                 final String currentuserId = user.getUid();
                 String key = mRef.child("Users").push().getKey();
                 Map<String, String> friendsList = new HashMap<>();
-                friendsList.put("Id_friend",userId);
+                friendsList.put("Uid_friend",userId);
                 Map<String, Object> childUpdates = new HashMap<>();
                 childUpdates.put("/Users/"+currentuserId+ "/friendsList/"+"/" + key, friendsList);
                 mRef.updateChildren(childUpdates);
