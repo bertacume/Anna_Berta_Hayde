@@ -67,10 +67,10 @@ public class AdapterCategory extends BaseAdapter  {
 
         Category dir = items.get(position);
 
-        TextView title = (TextView) v.findViewById(R.id.description);
+        TextView title = (TextView) v.findViewById(R.id.name);
         title.setText(dir.getName());
 
-        TextView description = (TextView) v.findViewById(R.id.name);
+        TextView description = (TextView) v.findViewById(R.id.description);
         description.setText(dir.getDescription());
 
 
