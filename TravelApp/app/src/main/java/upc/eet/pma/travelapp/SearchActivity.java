@@ -97,7 +97,7 @@ public class SearchActivity extends AppCompatActivity  {
             @Override
             public boolean onQueryTextChange(String newText) {
                 //firebaseListAdapter.notifyDataSetChanged(newText);
-                //adapter.getFilter().filter(newText);
+                adapter.getFilter().filter(newText);
 
                 return false;
             }
@@ -122,7 +122,7 @@ public class SearchActivity extends AppCompatActivity  {
                     //userList.add((String)email);
                     String S_email = email.toString();
                     String S_Uid_ = Uid_.toString();
-                    userList.add(new Category(i++, S_email, S_Uid_));
+                    userList.add(new Category(/*i++,*/ S_email, S_Uid_));
                 }
                 adapter = new AdapterCategory(
                         SearchActivity.this,

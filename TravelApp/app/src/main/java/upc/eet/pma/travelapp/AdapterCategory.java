@@ -17,10 +17,12 @@ import com.firebase.client.authentication.Constants;
 
 import java.util.ArrayList;
 
-public class AdapterCategory extends BaseAdapter  {
+public class AdapterCategory extends BaseAdapter implements Filterable {
     protected Activity activity;
     //private Context mContext;
     protected ArrayList<Category> items;
+    CustomFilter filter;
+    ArrayList<Category> filterList;
 
 
 
@@ -28,6 +30,7 @@ public class AdapterCategory extends BaseAdapter  {
         this.activity = activity;
         //this.mContext = mContext;
         this.items = items;
+        this.filterList = items;
     }
 
     @Override
@@ -101,5 +104,52 @@ public class AdapterCategory extends BaseAdapter  {
         };
     } */
 
+    @Override
+    public Filter getFilter() {
+        if (filter == null){
+            filter = new CustomFilter();
+        }
+        return filter;
+    }
+    //INNER CLASS
+    class CustomFilter extends Filter{
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            FilterResults results = new FilterResults();
+
+            if(constraint != null && constraint.length()>0 ){
+                //CONSTRAINT TO UPPER
+                constraint = constraint.toString().toUpperCase();
+
+                ArrayList<Category> filters = new ArrayList<Category>();
+
+                //get specific items
+                for(int i = 0; i < filterList.size();i++){
+                    if (filterList.get(i).getName().toUpperCase().contains(constraint)){
+                        Category p = new Category(filterList.get(i).getName(), filterList.get(i).getName());
+                        filters.add(p);
+                    }
+                }
+
+                results.count = filters.size();
+                results.values = filters;
+
+            }else {
+                results.count = filterList.size();
+                results.values = filterList;
+
+            }
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            items = (ArrayList<Category>) results.values;
+            notifyDataSetChanged();
+        }
+    }
 
 }
