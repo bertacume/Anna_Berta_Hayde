@@ -70,6 +70,14 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".MyFriendsActivity">
+            <intent-filter>
+                <action android:name="upc.eet.pma.travelapp.MyFriendsActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC95o-DJzoC2yxBjWQ-_ACk2KKeKAAhTZA" />

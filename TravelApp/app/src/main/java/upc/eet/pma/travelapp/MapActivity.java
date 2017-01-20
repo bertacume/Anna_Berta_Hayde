@@ -29,6 +29,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private Button mProfileBtn;
     private Button mSearchBtn;
     private Button mRequestsBtn;
+    private Button mMyFriendsBtn;
     private GoogleMap mMap;
     private Marker marker;
     private TextView location_txt;
@@ -67,6 +68,16 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             @Override
             public void onClick(View v) {
                 Intent i = new Intent("upc.eet.pma.travelapp.RequestsActivity");
+                startActivity(i);
+
+            }
+        });
+
+        mMyFriendsBtn = (Button) findViewById(R.id.MyFriendsBtn);
+        mMyFriendsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent("upc.eet.pma.travelapp.MyFriendsActivity");
                 startActivity(i);
 
             }
