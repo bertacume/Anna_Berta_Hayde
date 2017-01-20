@@ -10,13 +10,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.firebase.client.core.Tag;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,18 +22,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
+
 
 public class MyFriendsActivity extends AppCompatActivity {
     private FirebaseDatabase usersDatabase;
     private DatabaseReference usersDatabaseReference;
     private ArrayList<String> userList;
-    //private HashMap<String, String> mFriendMap=new HashMap<String, String>();
-   //DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
-    //DatabaseReference friendsRef = mRef.child("Users").child("friendsList");
-    private String Clau;
+
 
     private ArrayAdapter adapter;
     private ListView mListView;
@@ -50,7 +42,6 @@ public class MyFriendsActivity extends AppCompatActivity {
 
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         usersDatabase = FirebaseDatabase.getInstance();
-        //usersDatabaseReference = usersDatabase.getReference("Users");
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String currentuserId = user.getUid();
 
@@ -123,18 +114,16 @@ public class MyFriendsActivity extends AppCompatActivity {
                 while (iterator.hasNext()) {
                     DataSnapshot data = iterator.next();
                     //String key = mRef.child("Users").push().getKey();
-                    Object email = data.child("Uid_friend").getValue();
+                    Object Uid_friend = data.child("Uid_friend").getValue();
                     //Object Uid_ = data.child("Uid_").getValue();
 
                     // String S_Uid_ = Uid_.toString();
 
-
-
-                    String S_email = email.toString();
-                    userList.add(S_email);
+                    String S_UidFriend = Uid_friend.toString();
+                    userList.add(S_UidFriend);
                     DatabaseReference usersRef = usersDatabase.getReference().child("Users");
-                    //Object FName = usersDatabase.getReference().child("Users").child(S_email).child("full_name");
-                    usersRef.child(S_email).child("full_name").addValueEventListener(
+
+                    usersRef.child(S_UidFriend).child("full_name").addValueEventListener(
                                     new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
