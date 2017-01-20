@@ -126,6 +126,7 @@ public class MyFriendsActivity extends AppCompatActivity {
                     String S_UidFriend = Uid_friend.toString();
                     userList.add(S_UidFriend);
                     User.currentUser.friendsList.put(S_UidFriend, true);
+                    //Log.v("Ref_amic",S_UidFriend);
 
 
                     DatabaseReference usersRef = usersDatabase.getReference().child("Users");

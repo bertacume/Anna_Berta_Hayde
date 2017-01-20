@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -33,6 +34,8 @@ public class FriendActivity extends AppCompatActivity {
     private TextView user_emailuser;
     private String id_pos;
     private ToggleButton Follow;
+    private  Button FollowBtn;
+    private Button UnfollowBtn;
     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference friendsRef = mRef.child("Users").child("friendsList");
     private ArrayList<Category> userList;
@@ -52,6 +55,8 @@ public class FriendActivity extends AppCompatActivity {
         user_emailuser.setText(user_email);
 
         Follow = (ToggleButton) findViewById(R.id.FollowBtn);
+        FollowBtn = (Button) findViewById (R.id.Follow_btn);
+        UnfollowBtn = (Button) findViewById(R.id.Unfollow_btn);
 
         // Mirem si el 'user_uid' està a User.currentUser.friendsList
 
@@ -64,9 +69,32 @@ public class FriendActivity extends AppCompatActivity {
             }
         }
 
+        if (ja_el_seguim!=true) {
+            FollowBtn.setVisibility(View.VISIBLE);
+            UnfollowBtn.setVisibility(View.GONE);
+        }else {
+            FollowBtn.setVisibility(View.GONE);
+            UnfollowBtn.setVisibility(View.VISIBLE);
+        }
+
+        FollowBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                follow(user_email, user_uid);
+                Log.v("FOLLOW", "FOLLOW");
+            }
+        });
 
 
-        Follow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        UnfollowBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                stopFollowing(user_email);
+                Log.v("UNFOLLOW", "UNFOLLOW");
+            }
+        });
+
+
+
+       /* Follow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -79,7 +107,8 @@ public class FriendActivity extends AppCompatActivity {
                     Toast.makeText(FriendActivity.this, String.format("Unfollowing '%s'", user_email), Toast.LENGTH_SHORT).show();
                 }
             }
-        });}
+        });*/
+    }
 
 
     //Agregar al contacto a tu lista de amigos
@@ -98,6 +127,9 @@ public class FriendActivity extends AppCompatActivity {
                 mRef.updateChildren(childUpdates);
 
                 Clau = key;
+
+                FollowBtn.setVisibility(View.GONE);
+                UnfollowBtn.setVisibility(View.VISIBLE);
 
                 Log.v("Added", userEmail);
             }
@@ -125,6 +157,9 @@ public class FriendActivity extends AppCompatActivity {
                 Map<String, Object> childUpdates = new HashMap<>();
                 childUpdates.put("/Users/"+currentuserId+ "/friendsList/"+"/" + key2, friendsList);
                 mRef.updateChildren(childUpdates);
+
+                FollowBtn.setVisibility(View.VISIBLE);
+                UnfollowBtn.setVisibility(View.GONE);
 
                 Log.v("Removed", userEmail);
             }
