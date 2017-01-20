@@ -52,6 +52,20 @@ public class FriendActivity extends AppCompatActivity {
         user_emailuser.setText(user_email);
 
         Follow = (ToggleButton) findViewById(R.id.FollowBtn);
+
+        // Mirem si el 'user_uid' està a User.currentUser.friendsList
+
+        boolean ja_el_seguim = false;
+        if (User.currentUser != null) {
+            for (Map.Entry<String, Boolean> friend_uid : User.currentUser.friendsList.entrySet()) {
+                if (friend_uid.equals(user_uid)) {
+                    ja_el_seguim = true;
+                }
+            }
+        }
+
+
+
         Follow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

@@ -117,10 +117,17 @@ public class MyFriendsActivity extends AppCompatActivity {
                     Object Uid_friend = data.child("Uid_friend").getValue();
                     //Object Uid_ = data.child("Uid_").getValue();
 
+                    if (User.currentUser == null) {
+                        User.currentUser = new User();
+                    }
+
                     // String S_Uid_ = Uid_.toString();
 
                     String S_UidFriend = Uid_friend.toString();
                     userList.add(S_UidFriend);
+                    User.currentUser.friendsList.put(S_UidFriend, true);
+
+
                     DatabaseReference usersRef = usersDatabase.getReference().child("Users");
 
                     usersRef.child(S_UidFriend).child("full_name").addValueEventListener(

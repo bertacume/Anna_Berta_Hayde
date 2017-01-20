@@ -14,10 +14,11 @@ public class User {
     public String full_name;
     public String email;
     public String ulocation; //Ciudad,Pais
-    public Map<String,Boolean> friendsList = new TreeMap<>(); //String: uid, boolean : ?
+    public Map<String,Boolean> friendsList = new HashMap<>(); //String: uid, boolean : ?
     public boolean isFantasma;
     public String Uid_;
 
+    static public User currentUser;
 
     public User() {
    //
