@@ -33,14 +33,16 @@ public class SearchActivity extends AppCompatActivity  {
 
     private AdapterCategory adapter;
     private  ListView mListView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
         mListView = (ListView) findViewById(R.id.listViewSearch);
+        MyDatabaseUtil.getDatabase(); //Per inicialitzar el Firebase
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         usersDatabase = FirebaseDatabase.getInstance();
         usersDatabaseReference = usersDatabase.getReference("Users");
         addValueEventListener(usersDatabaseReference);

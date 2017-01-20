@@ -40,7 +40,7 @@ public class MyFriendsActivity extends AppCompatActivity {
 
         mListView = (ListView) findViewById(R.id.listViewMyFriends);
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        MyDatabaseUtil.getDatabase(); //Per inicialitzar el Firebase
         usersDatabase = FirebaseDatabase.getInstance();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String currentuserId = user.getUid();
