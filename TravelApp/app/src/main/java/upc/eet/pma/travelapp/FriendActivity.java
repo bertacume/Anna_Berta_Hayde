@@ -40,6 +40,7 @@ public class FriendActivity extends AppCompatActivity {
     DatabaseReference friendsRef = mRef.child("Users").child("friendsList");
     private ArrayList<Category> userList;
     private String Clau;
+    private Boolean ja_el_seguim;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -65,6 +66,8 @@ public class FriendActivity extends AppCompatActivity {
             for (Map.Entry<String, Boolean> friend_uid : User.currentUser.friendsList.entrySet()) {
                 if (friend_uid.equals(user_uid)) {
                     ja_el_seguim = true;
+                }else {
+                    ja_el_seguim = false;
                 }
             }
         }
@@ -113,60 +116,44 @@ public class FriendActivity extends AppCompatActivity {
 
     //Agregar al contacto a tu lista de amigos
     public void follow(final String userEmail, final String userId){
-        friendsRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                final String currentuserId = user.getUid();
-                String key = mRef.child("Users").push().getKey();
-                Map<String, String> friendsList = new HashMap<>();
-                friendsList.put("Uid_friend",userId);
-                Map<String, Object> childUpdates = new HashMap<>();
-                childUpdates.put("/Users/"+currentuserId+ "/friendsList/"+"/" + key, friendsList);
-                mRef.updateChildren(childUpdates);
+            final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            final String currentuserId = user.getUid();
+            String key = mRef.child("Users").push().getKey();
+            Map<String, String> friendsList = new HashMap<>();
+            friendsList.put("Uid_friend",userId);
+            Map<String, Object> childUpdates = new HashMap<>();
+            childUpdates.put("/Users/"+currentuserId+ "/friendsList/"+"/" + key, friendsList);
+            mRef.updateChildren(childUpdates);
 
-                Clau = key;
+            Clau = key;
 
-                FollowBtn.setVisibility(View.GONE);
-                UnfollowBtn.setVisibility(View.VISIBLE);
+            FollowBtn.setVisibility(View.GONE);
+            UnfollowBtn.setVisibility(View.VISIBLE);
 
-                Log.v("Added", userEmail);
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });}
+            Log.v("Added", userEmail);
+        }
 
 
     //Eliminar al contacto de tu lista de amigos
     public void stopFollowing(final String userEmail){
-        friendsRef.addValueEventListener(new ValueEventListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                final String currentuserId = user.getUid();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String currentuserId = user.getUid();
 
-                String key2 = Clau;
-                friendsRef.child(key2).removeValue();
+        String key2 = Clau;
+        friendsRef.child(key2).removeValue();
 
-                Map<String, String> friendsList = new HashMap<>();
-                friendsList.remove(key2);
-                Map<String, Object> childUpdates = new HashMap<>();
-                childUpdates.put("/Users/"+currentuserId+ "/friendsList/"+"/" + key2, friendsList);
-                mRef.updateChildren(childUpdates);
+        Map<String, String> friendsList = new HashMap<>();
+        friendsList.remove(key2);
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/Users/"+currentuserId+ "/friendsList/"+"/" + key2, friendsList);
+        mRef.updateChildren(childUpdates);
 
-                FollowBtn.setVisibility(View.VISIBLE);
-                UnfollowBtn.setVisibility(View.GONE);
+        FollowBtn.setVisibility(View.VISIBLE);
+        UnfollowBtn.setVisibility(View.GONE);
 
-                Log.v("Removed", userEmail);
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
+        Log.v("Removed", userEmail);
     }
+
 }
