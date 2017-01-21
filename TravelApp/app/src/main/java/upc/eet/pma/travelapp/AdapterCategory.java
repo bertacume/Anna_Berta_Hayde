@@ -2,8 +2,6 @@ package upc.eet.pma.travelapp;
 
 import android.app.Activity;
 import android.content.Context;
-import android.provider.SyncStateContract;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,20 +11,18 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 
-import com.firebase.client.authentication.Constants;
-
 import java.util.ArrayList;
 
 public class AdapterCategory extends BaseAdapter implements Filterable {
     protected Activity activity;
     //private Context mContext;
-    protected ArrayList<Category> items;
+    protected ArrayList<UserChild> items;
     CustomFilter filter;
-    ArrayList<Category> filterList;
+    ArrayList<UserChild> filterList;
 
 
 
-    public AdapterCategory (Activity activity, ArrayList<Category> items) {
+    public AdapterCategory (Activity activity, ArrayList<UserChild> items) {
         this.activity = activity;
         //this.mContext = mContext;
         this.items = items;
@@ -42,9 +38,9 @@ public class AdapterCategory extends BaseAdapter implements Filterable {
         items.clear();
     }
 
-    public void addAll(ArrayList<Category> category) {
-        for (int i = 0; i < category.size(); i++) {
-            items.add(category.get(i));
+    public void addAll(ArrayList<UserChild> userChild) {
+        for (int i = 0; i < userChild.size(); i++) {
+            items.add(userChild.get(i));
         }
     }
 
@@ -68,13 +64,13 @@ public class AdapterCategory extends BaseAdapter implements Filterable {
             v = inf.inflate(R.layout.item_category, null);
         }
 
-        Category dir = items.get(position);
+        UserChild dir = items.get(position);
 
         TextView title = (TextView) v.findViewById(R.id.name);
-        title.setText(dir.getName());
+        title.setText(dir.getEmail());
 
         TextView description = (TextView) v.findViewById(R.id.description);
-        description.setText(dir.getDescription());
+        description.setText(dir.getUid());
 
 
 
@@ -123,12 +119,12 @@ public class AdapterCategory extends BaseAdapter implements Filterable {
                 //CONSTRAINT TO UPPER
                 constraint = constraint.toString().toUpperCase();
 
-                ArrayList<Category> filters = new ArrayList<Category>();
+                ArrayList<UserChild> filters = new ArrayList<UserChild>();
 
                 //get specific items
                 for(int i = 0; i < filterList.size();i++){
-                    if (filterList.get(i).getName().toUpperCase().contains(constraint)){
-                        Category p = new Category(filterList.get(i).getName(), filterList.get(i).getName());
+                    if (filterList.get(i).getEmail().toUpperCase().contains(constraint)){
+                        UserChild p = new UserChild(filterList.get(i).getEmail(), filterList.get(i).getEmail());
                         filters.add(p);
                     }
                 }
@@ -147,7 +143,7 @@ public class AdapterCategory extends BaseAdapter implements Filterable {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            items = (ArrayList<Category>) results.values;
+            items = (ArrayList<UserChild>) results.values;
             notifyDataSetChanged();
         }
     }

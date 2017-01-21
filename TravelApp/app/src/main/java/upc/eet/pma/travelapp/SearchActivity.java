@@ -9,7 +9,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,7 +25,7 @@ public class SearchActivity extends AppCompatActivity  {
 
     private FirebaseDatabase usersDatabase;
     private DatabaseReference usersDatabaseReference;
-    private ArrayList<Category> userList;
+    private ArrayList<UserChild> userList;
     int i = 0;
     //private FirebaseListAdapter firebaseListAdapter;
     //private User value;
@@ -67,7 +66,7 @@ public class SearchActivity extends AppCompatActivity  {
             @Override
             public void onItemClick(AdapterView<?> parent, View item, int pos, long id) {
                 Toast.makeText(SearchActivity.this, String.format("'%s' Profile",
-                        userList.get(pos).getName()), Toast.LENGTH_SHORT).show();
+                        userList.get(pos).getEmail()), Toast.LENGTH_SHORT).show();
                 //Toast.makeText(SearchActivity.this, String.format("'%s' Profile", userList.get(pos).getDescription()), Toast.LENGTH_SHORT).show();
 
                 Intent i = new Intent("upc.eet.pma.travelapp.FriendActivity");
@@ -124,11 +123,9 @@ public class SearchActivity extends AppCompatActivity  {
                     DataSnapshot data = iterator.next();
                     Object email = data.child("email").getValue();
                     Object Uid_ = data.child("Uid_").getValue();
-                                 // User value = data.getValue(User.class);
-                    //userList.add((String)email);
                     String S_email = email.toString();
                     String S_Uid_ = Uid_.toString();
-                    userList.add(new Category(/*i++,*/ S_email, S_Uid_));
+                    userList.add(new UserChild(S_email, S_Uid_));
                 }
                 adapter = new AdapterCategory(
                         SearchActivity.this,

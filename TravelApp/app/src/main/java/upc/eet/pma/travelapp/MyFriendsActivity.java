@@ -1,18 +1,10 @@
 package upc.eet.pma.travelapp;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -22,16 +14,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 
 public class MyFriendsActivity extends AppCompatActivity {
     private FirebaseDatabase usersDatabase;
     private DatabaseReference usersDatabaseReference;
 
-    private ArrayList<Category> userList;
+    private ArrayList<UserChild> userList;
     private AdapterCategory adapter;
     private ListView mListView;
 
@@ -125,7 +115,7 @@ public class MyFriendsActivity extends AppCompatActivity {
                                     // Get user value
                                     String full_name = dataSnapshot.getValue(User.class).full_name;
                                     String uLocation = dataSnapshot.getValue(User.class).ulocation;
-                                    userList.add(new Category(full_name,uLocation));
+                                    userList.add(new UserChild(full_name,uLocation));
                                 }
 
                                 @Override

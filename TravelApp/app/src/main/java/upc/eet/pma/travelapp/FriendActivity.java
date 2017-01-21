@@ -1,33 +1,22 @@
 package upc.eet.pma.travelapp;
 
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class FriendActivity extends AppCompatActivity {
     private FirebaseDatabase usersDatabase;
@@ -39,7 +28,7 @@ public class FriendActivity extends AppCompatActivity {
     private Button UnfollowBtn;
     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference friendsRef = mRef.child("Users").child("friendsList");
-    private ArrayList<Category> userList;
+    private ArrayList<UserChild> userList;
     private String Clau;
     private Boolean ja_el_seguim;
 
@@ -50,10 +39,10 @@ public class FriendActivity extends AppCompatActivity {
 
         id_pos = getIntent().getExtras().getString("id_pos");
         final int id_ = Integer.parseInt(id_pos);
-        userList = (ArrayList<Category>) getIntent().getSerializableExtra("userList");
+        userList = (ArrayList<UserChild>) getIntent().getSerializableExtra("userList");
         user_emailuser = (TextView) findViewById(R.id.useremail_txt);
-        final String user_email = userList.get(id_).getName(); //user_email és l'email de l'amic seleccionat
-        final String user_uid = userList.get(id_).getDescription(); //user_uid és l'uid de l'amic seleccionat
+        final String user_email = userList.get(id_).getEmail(); //user_email és l'email de l'amic seleccionat
+        final String user_uid = userList.get(id_).getUid(); //user_uid és l'uid de l'amic seleccionat
         user_emailuser.setText(user_email);
 
         Follow = (ToggleButton) findViewById(R.id.FollowBtn);
