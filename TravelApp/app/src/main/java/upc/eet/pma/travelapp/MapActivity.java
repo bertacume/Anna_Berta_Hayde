@@ -1,5 +1,8 @@
 package upc.eet.pma.travelapp;
 
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.content.Intent;
@@ -10,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -31,6 +35,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -42,10 +48,14 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private Button mMyFriendsBtn;
     private GoogleMap mMap;
     private Marker marker;
+    private Marker friendMarker;
     private TextView location_txt;
     private Button mLocation;
     double lat = 0.0;
     double lng = 0.0;
+
+    private FirebaseDatabase usersDatabase;
+    private DatabaseReference usersDatabaseReference;
 
 
 
@@ -55,13 +65,18 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         setContentView(R.layout.activity_map);
         initMap();
 
+        MyDatabaseUtil.getDatabase(); //Per inicialitzar el Firebase
+        usersDatabase = FirebaseDatabase.getInstance();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String userId = user.getUid();
+        usersDatabaseReference = usersDatabase.getReference().child("Users").child(userId).child("friendsList");
+
+
         if (User.currentUser != null) {
             Log.v("Username", User.currentUser.full_name + "");
         } else{
-            final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
             DatabaseReference userRef = mDatabase.child("Users");
-            String userId = user.getUid();
             userRef.child(userId).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -81,6 +96,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             });
             // Firebase Current User Data saved into User.currentuser (static object) per evitar un error si hi ha un fallo de log in
         }
+
+
 
 
         mProfileBtn = (Button) findViewById(R.id.ProfileBtn);
@@ -130,7 +147,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         return;
     }
 
-
     private void LocationToString(Location location) {
 
         if (location != null) {
@@ -157,7 +173,21 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
         mMap.addMarker(options);
         mMap.animateCamera(my_Location);
+        //marcador personal afegit
+
     }
+
+    private void addFriendMarker(LatLng friendCoordinates, String email){
+        if (friendMarker != null) friendMarker.remove();
+        //LatLng friendCoordinates = new LatLng(Lat, Lng);
+        MarkerOptions optionsFriend = new MarkerOptions()
+                .position(friendCoordinates)
+                .title(email)
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+        mMap.addMarker(optionsFriend);
+
+    }
+
     private void refreshLocation(Location location){
         if(location!=null){
             lat = location.getLatitude();
@@ -183,40 +213,84 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
     }
 
+    public void myFriendsLocation (){
+        usersDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
+                Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
+                Iterator<DataSnapshot> iterator = snapshotIterator.iterator();
+
+                while (iterator.hasNext()) {
+                    DataSnapshot data = iterator.next();
+                    Object Uid_friend = data.child("Uid_friend").getValue();
+                    String S_UidFriend = Uid_friend.toString();
+
+                    DatabaseReference usersRef = usersDatabase.getReference().child("Users");
+                    usersRef.child(S_UidFriend).addListenerForSingleValueEvent(
+                            new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    // Get each user email and Location
+                                    String email = dataSnapshot.getValue(User.class).email;
+                                    String uLocation = dataSnapshot.getValue(User.class).ulocation;
+                                    LatLng LatLng_ulocation = getLocationFromAddress(uLocation);
+                                    addFriendMarker(LatLng_ulocation,email);
+                                    Log.v("LocationFriend", uLocation);
+
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                }
+                            }
+                    );
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+
+
+
+        });}
+
+    public LatLng getLocationFromAddress(String friendAddress) {
+
+        Geocoder coder = new Geocoder(this);
+        List<Address> address;
+        LatLng p1 = null;
+
+        try {
+            address = coder.getFromLocationName(friendAddress, 5);
+            if (address == null) {
+                return null;
+            }
+            Address location = address.get(0);
+            location.getLatitude();
+            location.getLongitude();
+
+            p1 = new LatLng(location.getLatitude(), location.getLongitude() );
+
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+        }
+
+        return p1;
+    }
 
     public void initMap() {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         myLocation();
-
-        // Add a marker in Sydney and move the camera
-        /* LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
-
+        myFriendsLocation ();
     }
-
-
-
-    /*@Override
-    public void onMapReady(GoogleMap googleMap) {
-       try {
-            if (googleMap != null) {
-                mMap = googleMap;
-                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("ERROR", "GOOGLE MAPS NOT LOADED");
-        }
-    }*/
 
 }
 
