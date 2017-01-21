@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -59,16 +60,18 @@ public class FriendActivity extends AppCompatActivity {
         FollowBtn = (Button) findViewById (R.id.Follow_Btn);
         UnfollowBtn = (Button) findViewById(R.id.Unfollow_Btn);
 
-        // Mirem si el 'user_uid' està a User.currentUser.friendsList
 
-        boolean ja_el_seguim = false;
+        // Mirem si el 'user_uid' està a User.currentUser.friendsList
+        ja_el_seguim = false;
         if (User.currentUser != null) {
-            for (Map.Entry<String, Object> friend_uid : User.currentUser.friendsList.entrySet()) {
-                if (friend_uid.equals(user_uid)) {
+            for ( String key : User.currentUser.friendsList.keySet() ) {
+                String friend_uid = User.currentUser.friendsList.get(key).toString();
+                //Afegim "{Uid_friend=" pk no sabem com obtenir el valor de la uid_friend del User.currentUser.friendList
+                String user_uid_check = "{Uid_friend=" + user_uid + "}";
+                if (friend_uid.equals(user_uid_check)) {
                     ja_el_seguim = true;
-                }
-            }
-        }
+            }}
+
 
         if (ja_el_seguim!=true) {
             FollowBtn.setVisibility(View.VISIBLE);
@@ -111,7 +114,7 @@ public class FriendActivity extends AppCompatActivity {
                 }
             }
         });*/
-    }
+    }}
 
 
     //Agregar al contacto a tu lista de amigos
