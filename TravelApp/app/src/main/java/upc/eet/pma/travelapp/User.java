@@ -14,7 +14,7 @@ public class User {
     public String full_name;
     public String email;
     public String ulocation; //Ciudad,Pais
-    public Map<String,Boolean> friendsList = new HashMap<>(); //String: uid, boolean : ?
+    public Map<String,Object> friendsList = new HashMap<>(); //String: uid, boolean : ?
     public boolean isFantasma;
     public String Uid_;
 
@@ -43,15 +43,15 @@ public class User {
         friendsList.remove(uidFriend);
     }
     //Seguir: Agregar al contacto a tu lista de amigos
-    public void follow(String uidFriend){
+   /* public void follow(String uidFriend){
         friendsList.put(uidFriend,true);
-    }
+    }*/
 
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
 
-        friendsList.put("uid_prueba",true);
+        //friendsList.put("uid_prueba",true);
         result.put("full_name", full_name);
         result.put("email", email);
         result.put("ulocation", ulocation);

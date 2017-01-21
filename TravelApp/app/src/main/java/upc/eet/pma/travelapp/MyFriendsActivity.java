@@ -22,7 +22,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 
 public class MyFriendsActivity extends AppCompatActivity {
@@ -125,7 +127,7 @@ public class MyFriendsActivity extends AppCompatActivity {
 
                     String S_UidFriend = Uid_friend.toString();
                     userList.add(S_UidFriend);
-                    User.currentUser.friendsList.put(S_UidFriend, true);
+                    User.currentUser.friendsList.put("Uid_friend", S_UidFriend);
                     //Log.v("Ref_amic",S_UidFriend);
 
 

@@ -63,7 +63,7 @@ public class FriendActivity extends AppCompatActivity {
 
         boolean ja_el_seguim = false;
         if (User.currentUser != null) {
-            for (Map.Entry<String, Boolean> friend_uid : User.currentUser.friendsList.entrySet()) {
+            for (Map.Entry<String, Object> friend_uid : User.currentUser.friendsList.entrySet()) {
                 if (friend_uid.equals(user_uid)) {
                     ja_el_seguim = true;
                 }else {

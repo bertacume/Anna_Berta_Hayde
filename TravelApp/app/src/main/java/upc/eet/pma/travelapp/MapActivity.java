@@ -24,6 +24,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
+import java.util.Set;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback  {
     private Button mProfileBtn;
@@ -36,6 +37,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private Button mLocation;
     double lat = 0.0;
     double lng = 0.0;
+    Set set;
 
 
     @Override
@@ -43,6 +45,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         initMap();
+
+        set = User.currentUser.friendsList.entrySet();
+
+        Log.v("CurrentUser:", User.currentUser.email);
+        Log.v("CurrentUser_FirendsList", set.toString());
 
         mProfileBtn = (Button) findViewById(R.id.ProfileBtn);
         mProfileBtn.setOnClickListener(new View.OnClickListener() {
