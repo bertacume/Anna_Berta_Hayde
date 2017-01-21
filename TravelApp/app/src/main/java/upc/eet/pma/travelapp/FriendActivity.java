@@ -66,8 +66,6 @@ public class FriendActivity extends AppCompatActivity {
             for (Map.Entry<String, Object> friend_uid : User.currentUser.friendsList.entrySet()) {
                 if (friend_uid.equals(user_uid)) {
                     ja_el_seguim = true;
-                }else {
-                    ja_el_seguim = false;
                 }
             }
         }
@@ -83,6 +81,7 @@ public class FriendActivity extends AppCompatActivity {
         FollowBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 follow(user_email, user_uid);
+                Toast.makeText(FriendActivity.this, String.format("Following '%s'", user_email), Toast.LENGTH_SHORT).show();
                 Log.v("FOLLOW", "FOLLOW");
             }
         });
@@ -90,7 +89,8 @@ public class FriendActivity extends AppCompatActivity {
 
         UnfollowBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                stopFollowing(user_email);
+                stopFollowing(user_email, user_uid);
+                Toast.makeText(FriendActivity.this, String.format("Unfollowing '%s'", user_email), Toast.LENGTH_SHORT).show();
                 Log.v("UNFOLLOW", "UNFOLLOW");
             }
         });
@@ -117,32 +117,35 @@ public class FriendActivity extends AppCompatActivity {
     //Agregar al contacto a tu lista de amigos
     public void follow(final String userEmail, final String userId){
 
-            final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            final String currentuserId = user.getUid();
-            String key = mRef.child("Users").push().getKey();
-            Map<String, String> friendsList = new HashMap<>();
-            friendsList.put("Uid_friend",userId);
-            Map<String, Object> childUpdates = new HashMap<>();
-            childUpdates.put("/Users/"+currentuserId+ "/friendsList/"+"/" + key, friendsList);
-            mRef.updateChildren(childUpdates);
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser ();
+        final String currentuserId = user.getUid();
 
-            Clau = key;
+        String key = mRef.child("Users").push().getKey();
+        Clau = key;
 
-            FollowBtn.setVisibility(View.GONE);
-            UnfollowBtn.setVisibility(View.VISIBLE);
+        Map<String, String> friendsList = new HashMap<>();
 
-            Log.v("Added", userEmail);
+        friendsList.put("Uid_friend",userId);
+        friendsList.put("Clau", Clau);
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/Users/"+currentuserId+ "/friendsList/"+"/" + key, friendsList);
+        mRef.updateChildren(childUpdates);
+
+        FollowBtn.setVisibility (View.GONE);
+        UnfollowBtn.setVisibility (View.VISIBLE);
+
+        Log.v("Added", userEmail);
         }
 
 
     //Eliminar al contacto de tu lista de amigos
-    public void stopFollowing(final String userEmail){
+    public void stopFollowing(final String userEmail, final String userId ){
 
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String currentuserId = user.getUid();
 
         String key2 = Clau;
-        friendsRef.child(key2).removeValue();
 
         Map<String, String> friendsList = new HashMap<>();
         friendsList.remove(key2);
@@ -155,5 +158,4 @@ public class FriendActivity extends AppCompatActivity {
 
         Log.v("Removed", userEmail);
     }
-
-}
+    }
