@@ -56,7 +56,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         initMap();
 
         if (User.currentUser != null) {
-            Log.v("Username", User.currentUser.full_name);
+            Log.v("Username", User.currentUser.full_name + "");
         } else{
             final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -79,7 +79,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
                 }
             });
-            // Firebase Current User Data saved into User.currentuser (static object)
+            // Firebase Current User Data saved into User.currentuser (static object) per evitar un error si hi ha un fallo de log in
         }
 
 
