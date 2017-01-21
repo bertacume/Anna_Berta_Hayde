@@ -37,7 +37,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private Button mLocation;
     double lat = 0.0;
     double lng = 0.0;
-    Set set;
 
 
     @Override
@@ -46,10 +45,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         setContentView(R.layout.activity_map);
         initMap();
 
-        set = User.currentUser.friendsList.entrySet();
+        Log.v("Username", User.currentUser.full_name);
 
-        Log.v("CurrentUser:", User.currentUser.email);
-        Log.v("CurrentUser_FirendsList", set.toString());
 
         mProfileBtn = (Button) findViewById(R.id.ProfileBtn);
         mProfileBtn.setOnClickListener(new View.OnClickListener() {

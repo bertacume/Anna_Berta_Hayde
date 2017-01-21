@@ -80,14 +80,15 @@ public class NewUserActivity extends AppCompatActivity {
                     String userId=user.getUid();
                     String name = mName.getText().toString();
                     String email = mEmail.getText().toString();
-                    String ulocation="";
+                    HashMap<String, Object> friendsList = new HashMap<String, Object>(1, 1);
+                    String ulocation="Location";
                     String Uid_ = userId;
                    // Map<String,Object> friendList= new TreeMap<String,Object>();
 
                    // String friendsList="";
                     boolean isFantasma = false;
 
-                    writeNewUser(userId,name,email,ulocation,isFantasma,Uid_);
+                    writeNewUser(userId,name,email, friendsList, ulocation,isFantasma,Uid_);
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
@@ -111,7 +112,7 @@ public class NewUserActivity extends AppCompatActivity {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
-    private void writeNewUser(String userId, String name,String email,String ulocation ,boolean isFantasma, String Uid_) {
+    private void writeNewUser(String userId, String name,String email, Map friendsList, String ulocation ,boolean isFantasma, String Uid_) {
 
         //User user = new User(name,email,ulocation,isFantasma,friendList);
         //mRef.child("Users").child(userId).setValue(user);
@@ -119,7 +120,7 @@ public class NewUserActivity extends AppCompatActivity {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         //String key = mRef.child("Users").push().getKey();
-        User user = new User(name, email, ulocation,isFantasma, Uid_);
+        User user = new User(name, email, friendsList, ulocation,isFantasma, Uid_);
         Map<String, Object> postValues = user.toMap();
         //Map<String, String> friendsList = new HashMap<>();
 

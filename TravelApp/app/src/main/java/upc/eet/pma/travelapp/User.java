@@ -25,10 +25,11 @@ public class User {
     }
 
     //constructor:
-    public User(String full_name,String email,String ulocation,boolean isFantasma,String Uid_) {
+    public User(String full_name,String email, Map friendsList, String ulocation,boolean isFantasma,String Uid_) {
 
         this.full_name = full_name;
         this.email = email;
+        this.friendsList = friendsList;
         this.ulocation = ulocation;
         this.isFantasma = isFantasma; // predeterminado como falso, es decir si muestra su ubicacion
         this.Uid_ = Uid_;

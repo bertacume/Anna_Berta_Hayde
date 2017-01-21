@@ -22,6 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LogInActivity extends AppCompatActivity {
 
     private static final String TAG = "";
@@ -84,7 +87,8 @@ public class LogInActivity extends AppCompatActivity {
                             String uLocation = dataSnapshot.getValue(User.class).ulocation;
                             Boolean isFantasma = dataSnapshot.getValue(User.class).isFantasma;
                             String Uid_ = dataSnapshot.getValue(User.class).Uid_;
-                            User.currentUser = new User(full_name,email,uLocation,isFantasma,Uid_);
+                            Map friendsList = dataSnapshot.getValue(User.class).friendsList;
+                            User.currentUser = new User(full_name,email,friendsList,uLocation,isFantasma,Uid_);
                         }
 
                         @Override
