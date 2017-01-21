@@ -30,11 +30,11 @@ import java.util.Map;
 public class MyFriendsActivity extends AppCompatActivity {
     private FirebaseDatabase usersDatabase;
     private DatabaseReference usersDatabaseReference;
-    private ArrayList<String> userList;
 
-
-    private ArrayAdapter adapter;
+    private ArrayList<Category> userList;
+    private AdapterCategory adapter;
     private ListView mListView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +46,7 @@ public class MyFriendsActivity extends AppCompatActivity {
         usersDatabase = FirebaseDatabase.getInstance();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String currentuserId = user.getUid();
-
         usersDatabaseReference = usersDatabase.getReference().child("Users").child(currentuserId).child("friendsList");
-        Log.v("1", usersDatabaseReference.toString());
-        Log.v("2", usersDatabase.getReference().child("Users").child(currentuserId).child("friendsList").toString());
-        Log.v("user", user.toString());
-        Log.v("currentuserid", currentuserId);
         addValueEventListener(usersDatabaseReference);
 
 
@@ -110,55 +105,39 @@ public class MyFriendsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 userList = new ArrayList<>();
-                //String key = friendsRef.getKey().toString();
                 Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
                 Iterator<DataSnapshot> iterator = snapshotIterator.iterator();
                 while (iterator.hasNext()) {
                     DataSnapshot data = iterator.next();
-                    //String key = mRef.child("Users").push().getKey();
                     Object Uid_friend = data.child("Uid_friend").getValue();
-                    //Object Uid_ = data.child("Uid_").getValue();
 
                     if (User.currentUser == null) {
                         User.currentUser = new User();
                     }
-
-                    // String S_Uid_ = Uid_.toString();
-
                     String S_UidFriend = Uid_friend.toString();
-                    userList.add(S_UidFriend);
+
                     User.currentUser.friendsList.put("Uid_friend", S_UidFriend);
-                    //Log.v("Ref_amic",S_UidFriend);
-
-
                     DatabaseReference usersRef = usersDatabase.getReference().child("Users");
+                    usersRef.child(S_UidFriend).addValueEventListener(
+                            new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    // Get user value
+                                    String full_name = dataSnapshot.getValue(User.class).full_name;
+                                    String uLocation = dataSnapshot.getValue(User.class).ulocation;
+                                    userList.add(new Category(full_name,uLocation));
+                                }
 
-                    usersRef.child(S_UidFriend).child("full_name").addValueEventListener(
-                                    new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(DataSnapshot dataSnapshot) {
-                                            // Get user value
-                                            String uName = dataSnapshot.getValue(String.class);
-                                            //mUserName = (TextView) findViewById(R.id.userNametxt);
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
 
-                                            //mUserName.setText(uName);
-                                            Log.v("FriendName", uName);
-
-                                            // ...
                                         }
-
-                                        @Override
-                                        public void onCancelled(DatabaseError databaseError) {
-
-                                            // ...
-                                        }
-                                    }
-                            );
+                            }
+                    );
 
                 }
-                adapter = new ArrayAdapter<>(
+                adapter = new AdapterCategory(
                         MyFriendsActivity.this,
-                        android.R.layout.simple_list_item_1,
                         userList);
                 mListView.setAdapter(adapter);
             }
