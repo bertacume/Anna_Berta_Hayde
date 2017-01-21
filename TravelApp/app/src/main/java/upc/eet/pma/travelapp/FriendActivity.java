@@ -55,8 +55,8 @@ public class FriendActivity extends AppCompatActivity {
         user_emailuser.setText(user_email);
 
         Follow = (ToggleButton) findViewById(R.id.FollowBtn);
-        FollowBtn = (Button) findViewById (R.id.Follow_btn);
-        UnfollowBtn = (Button) findViewById(R.id.Unfollow_btn);
+        FollowBtn = (Button) findViewById (R.id.Follow_Btn);
+        UnfollowBtn = (Button) findViewById(R.id.Unfollow_Btn);
 
         // Mirem si el 'user_uid' està a User.currentUser.friendsList
 

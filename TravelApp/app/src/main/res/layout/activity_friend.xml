@@ -25,5 +25,17 @@
             android:textOff="Follow"
             android:textOn="Unfollow" />
 
+        <Button
+            android:text="FOLLOW"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Follow_Btn" />
+
+        <Button
+            android:text="UNFOLLOW"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Unfollow_Btn" />
+
     </LinearLayout>
 </LinearLayout>
