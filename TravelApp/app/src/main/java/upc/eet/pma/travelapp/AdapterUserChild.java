@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class AdapterCategory extends BaseAdapter implements Filterable {
+public class AdapterUserChild extends BaseAdapter implements Filterable {
     protected Activity activity;
     //private Context mContext;
     protected ArrayList<UserChild> items;
@@ -22,7 +22,7 @@ public class AdapterCategory extends BaseAdapter implements Filterable {
 
 
 
-    public AdapterCategory (Activity activity, ArrayList<UserChild> items) {
+    public AdapterUserChild(Activity activity, ArrayList<UserChild> items) {
         this.activity = activity;
         //this.mContext = mContext;
         this.items = items;
@@ -61,16 +61,16 @@ public class AdapterCategory extends BaseAdapter implements Filterable {
 
         if (convertView == null) {
             LayoutInflater inf = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inf.inflate(R.layout.item_category, null);
+            v = inf.inflate(R.layout.item_userchild, null);
         }
 
         UserChild dir = items.get(position);
 
-        TextView title = (TextView) v.findViewById(R.id.name);
-        title.setText(dir.getEmail());
+        TextView email = (TextView) v.findViewById(R.id.email);
+        email.setText(dir.getEmail());
 
-        TextView description = (TextView) v.findViewById(R.id.description);
-        description.setText(dir.getUid());
+        TextView Uid = (TextView) v.findViewById(R.id.Uid);
+        Uid.setText(dir.getUid());
 
 
 

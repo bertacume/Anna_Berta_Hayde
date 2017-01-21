@@ -30,7 +30,7 @@ public class SearchActivity extends AppCompatActivity  {
     //private FirebaseListAdapter firebaseListAdapter;
     //private User value;
 
-    private AdapterCategory adapter;
+    private AdapterUserChild adapter;
     private  ListView mListView;
 
     @Override
@@ -127,7 +127,7 @@ public class SearchActivity extends AppCompatActivity  {
                     String S_Uid_ = Uid_.toString();
                     userList.add(new UserChild(S_email, S_Uid_));
                 }
-                adapter = new AdapterCategory(
+                adapter = new AdapterUserChild(
                         SearchActivity.this,
                         userList);
                 mListView.setAdapter(adapter);
