@@ -1,5 +1,6 @@
 package upc.eet.pma.travelapp;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.content.Intent;
 import android.location.Location;
@@ -22,8 +23,16 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback  {
@@ -39,13 +48,39 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     double lng = 0.0;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         initMap();
 
-        Log.v("Username", User.currentUser.full_name);
+        if (User.currentUser != null) {
+            Log.v("Username", User.currentUser.full_name);
+        } else{
+            final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+            DatabaseReference userRef = mDatabase.child("Users");
+            String userId = user.getUid();
+            userRef.child(userId).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String full_name = dataSnapshot.getValue(User.class).full_name;
+                    String email = dataSnapshot.getValue(User.class).email;
+                    String uLocation = dataSnapshot.getValue(User.class).ulocation;
+                    Boolean isFantasma = dataSnapshot.getValue(User.class).isFantasma;
+                    String Uid_ = dataSnapshot.getValue(User.class).Uid_;
+                    Map friendsList = dataSnapshot.getValue(User.class).friendsList;
+                    User.currentUser = new User(full_name,email,friendsList,uLocation,isFantasma,Uid_);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            // Firebase Current User Data saved into User.currentuser (static object)
+        }
 
 
         mProfileBtn = (Button) findViewById(R.id.ProfileBtn);
