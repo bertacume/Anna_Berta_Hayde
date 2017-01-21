@@ -60,9 +60,9 @@ public class FriendActivity extends AppCompatActivity {
         FollowBtn = (Button) findViewById (R.id.Follow_Btn);
         UnfollowBtn = (Button) findViewById(R.id.Unfollow_Btn);
 
-
         // Mirem si el 'user_uid' està a User.currentUser.friendsList
         ja_el_seguim = false;
+        Clau = "";
         if (User.currentUser != null) {
             for ( String key : User.currentUser.friendsList.keySet() ) {
                 String friend_uid = User.currentUser.friendsList.get(key).toString();
@@ -70,8 +70,8 @@ public class FriendActivity extends AppCompatActivity {
                 String user_uid_check = "{Uid_friend=" + user_uid + "}";
                 if (friend_uid.equals(user_uid_check)) {
                     ja_el_seguim = true;
+                    Clau = key;
             }}
-
 
         if (ja_el_seguim!=true) {
             FollowBtn.setVisibility(View.VISIBLE);
@@ -124,12 +124,10 @@ public class FriendActivity extends AppCompatActivity {
         final String currentuserId = user.getUid();
 
         String key = mRef.child("Users").push().getKey();
-        Clau = key;
 
         Map<String, String> friendsList = new HashMap<>();
 
         friendsList.put("Uid_friend",userId);
-        friendsList.put("Clau", Clau);
 
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/Users/"+currentuserId+ "/friendsList/"+"/" + key, friendsList);
@@ -148,12 +146,10 @@ public class FriendActivity extends AppCompatActivity {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String currentuserId = user.getUid();
 
-        String key2 = Clau;
-
         Map<String, String> friendsList = new HashMap<>();
-        friendsList.remove(key2);
+        friendsList.remove(Clau);
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/Users/"+currentuserId+ "/friendsList/"+"/" + key2, friendsList);
+        childUpdates.put("/Users/"+currentuserId+ "/friendsList/"+"/" + Clau, friendsList);
         mRef.updateChildren(childUpdates);
 
         FollowBtn.setVisibility(View.VISIBLE);
