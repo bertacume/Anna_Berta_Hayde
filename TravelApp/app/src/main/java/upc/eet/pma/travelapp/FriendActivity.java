@@ -47,7 +47,7 @@ public class FriendActivity extends AppCompatActivity {
 
         user_emailuser = (TextView) findViewById(R.id.useremail_txt);
         user_nameuser = (TextView) findViewById(R.id.username_txt);
-        user_locationuser = (TextView) findViewById(R.id.userlocation_txt);
+        //user_locationuser = (TextView) findViewById(R.id.userlocation_txt);
 
         Toast_follow = getString(R.string.Following);
         Toast_unfollow = getString(R.string.Unfollowing);
@@ -64,7 +64,7 @@ public class FriendActivity extends AppCompatActivity {
                 String user_name = dataSnapshot.getValue(User.class).full_name;
                 String user_location = dataSnapshot.getValue(User.class).ulocation;
                 user_nameuser.setText(user_name);
-                user_locationuser.setText(user_location);
+                //user_locationuser.setText(user_location);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
