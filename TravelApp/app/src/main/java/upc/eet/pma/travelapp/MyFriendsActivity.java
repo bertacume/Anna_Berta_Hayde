@@ -67,13 +67,8 @@ public class MyFriendsActivity extends AppCompatActivity {
 
                         }
                     });
-
             }
     }
-
-
-
-
 
     private void addValueEventListener(final DatabaseReference userReference) {
         userReference.addValueEventListener(new ValueEventListener() {
@@ -100,13 +95,5 @@ public class MyFriendsActivity extends AppCompatActivity {
             }
         });
     }
-
-    public String removeLastCharacter(String str) {
-        if (str != null && str.length() > 0 && str.charAt(str.length()-1)=='x') {
-            str = str.substring(0, str.length()-1);
-        }
-        return str;
-    }
-
 
 }
