@@ -27,8 +27,7 @@ public class SearchActivity extends AppCompatActivity  {
     private DatabaseReference usersDatabaseReference;
     private ArrayList<UserChild> userList;
     int i = 0;
-    //private FirebaseListAdapter firebaseListAdapter;
-    //private User value;
+
 
     private AdapterUserChild adapter;
     private  ListView mListView;
