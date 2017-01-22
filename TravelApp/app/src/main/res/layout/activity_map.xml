@@ -34,14 +34,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/ProfileBtn"
-            android:text="mi perfil"
+            android:text="@string/Profile"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:backgroundTint="@color/colorPrimary" />
 
         <Button
-            android:text="Search"
+            android:text="@string/Search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/SearchBtn"
@@ -51,7 +51,7 @@
             android:backgroundTint="@color/colorPrimary" />
 
         <Button
-            android:text="My Location"
+            android:text="@string/My_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/MyLocationBtn"
@@ -60,14 +60,13 @@
             android:layout_centerHorizontal="true" />
 
         <Button
-            android:text="My Friends"
+            android:text="@string/My_friends"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/MyFriendsBtn"
             android:backgroundTint="@color/colorPrimary"
-            android:layout_alignParentTop="true"
-            android:layout_alignRight="@+id/MyLocationBtn"
-            android:layout_alignEnd="@+id/MyLocationBtn" />
+            android:layout_above="@+id/MyLocationBtn"
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 

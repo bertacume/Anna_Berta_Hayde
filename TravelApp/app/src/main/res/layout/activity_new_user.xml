@@ -8,10 +8,11 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="upc.eet.pma.travelapp.NewUserActivity">
+    tools:context="upc.eet.pma.travelapp.NewUserActivity"
+    android:background="@drawable/background">
 
     <TextView
-        android:text="E-mail:"
+        android:text="@string/Mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/emaillbl"
@@ -23,7 +24,7 @@
         android:layout_alignStart="@+id/passwordlbl" />
 
     <TextView
-        android:text="Name:"
+        android:text="@string/Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="61dp"
@@ -31,10 +32,11 @@
         android:textSize="18sp"
         android:textColor="@android:color/black"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/emaillbl"
-        android:layout_alignEnd="@+id/emaillbl"
         android:elevation="1dp"
-        android:layout_marginLeft="20dp" />
+        android:layout_alignRight="@+id/passwordlbl"
+        android:layout_alignEnd="@+id/passwordlbl"
+        android:layout_alignLeft="@+id/emaillbl"
+        android:layout_alignStart="@+id/emaillbl" />
 
     <EditText
         android:layout_width="100dp"
@@ -45,12 +47,12 @@
         android:layout_alignRight="@+id/passwordtxt"
         android:layout_alignEnd="@+id/passwordtxt"
         android:id="@+id/confirmtxt"
-        android:hint="re-enter pswrd"
+        android:hint="@string/reenter_password"
         android:layout_alignLeft="@+id/passwordtxt"
         android:layout_alignStart="@+id/passwordtxt" />
 
     <TextView
-        android:text="Confirm:"
+        android:text="@string/Confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/confirmpswrdlbl"
@@ -62,7 +64,7 @@
         android:layout_alignStart="@+id/passwordlbl" />
 
     <TextView
-        android:text="Password:"
+        android:text="@string/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/passwordlbl"
@@ -76,7 +78,7 @@
         android:layout_marginStart="22dp" />
 
     <Button
-        android:text="create new user"
+        android:text="@string/New_user"
         android:layout_width="wrap_content"
         android:id="@+id/createUserBtn"
         android:layout_marginTop="37dp"
@@ -85,7 +87,7 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="LOG IN"
+        android:text="@string/log_in"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginTop="11dp"
@@ -98,7 +100,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:hint="enter password"
+        android:hint="@string/enter_password"
         android:id="@+id/passwordtxt"
         android:layout_below="@+id/emailTxt"
         android:layout_alignLeft="@+id/nameTxt"
@@ -112,7 +114,7 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/emailTxt"
-        android:hint="e-mail address"
+        android:hint="@string/Mail_address"
         android:layout_below="@+id/nameTxt"
         android:layout_alignLeft="@+id/passwordtxt"
         android:layout_alignStart="@+id/passwordtxt"
@@ -124,7 +126,7 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/nameTxt"
-        android:hint="Full name"
+        android:hint="@string/full_name"
         android:layout_alignBaseline="@+id/namelbl"
         android:layout_alignBottom="@+id/namelbl"
         android:layout_alignParentRight="true"

@@ -2,10 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
 
     <Button
-        android:text="FOLLOW"
+        android:text="@string/Follow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Follow_Btn"
@@ -14,7 +15,7 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="UNFOLLOW"
+        android:text="@string/Unfollow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Unfollow_Btn"

@@ -17,6 +17,22 @@
     <string name="email_address">e-mail address</string>
     <string name="enter_password">enter password</string>
     <string name="reenter_password">re-enter password</string>
+    <string name="Save">SAVE</string>
+    <string name="Follow">FOLLOW</string>
+    <string name="Unfollow">UNFOLLOW</string>
+    <string name="My_friends">MY FRIENDS</string>
+    <string name="Search">SEARCH</string>
+    <string name="Profile">PROFILE</string>
+    <string name="My_location">MY LOCATION</string>
+    <string name="Name">Name:</string>
+    <string name="Mail">E-mail:</string>
+    <string name="Password">Password:</string>
+    <string name="Confirm">Confirm:</string>
+    <string name="New_user">CREATE NEW USER</string>
+    <string name="full_name">Full name</string>
+    <string name="Mail_address">e-mail address</string>
+    <string name="edit_name">EDIT NAME</string>
+    <string name="Im_here">I am here!</string>
     <string-array name="array_try">
         <item>Barcelona</item>
         <item>geudc</item>
