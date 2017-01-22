@@ -21,8 +21,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/Uid"
         android:text="Description"
-        android:textSize="5dp"
+        android:textSize="1dp"
 
-        android:visibility="invisible" />
+        android:visibility="visible"
+        android:textColor="@color/buttonTextColor" />
 
 </LinearLayout>

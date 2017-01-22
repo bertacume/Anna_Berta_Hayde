@@ -16,6 +16,9 @@ import java.util.ArrayList;
 public class AdapterUserChild extends BaseAdapter implements Filterable {
     protected Activity activity;
     //private Context mContext;
+    private String email;
+    private String Uid;
+    private UserChild userChild = new UserChild(email,Uid);
     protected ArrayList<UserChild> items;
     CustomFilter filter;
     ArrayList<UserChild> filterList;
@@ -45,9 +48,14 @@ public class AdapterUserChild extends BaseAdapter implements Filterable {
     }
 
     @Override
-    public Object getItem(int arg0) {
+    public UserChild getItem(int arg0) {
         return items.get(arg0);
     }
+
+    public UserChild getUserChild (int arg0){
+        return items.get(arg0);
+    }
+
 
     @Override
     public long getItemId(int position) {
@@ -124,7 +132,7 @@ public class AdapterUserChild extends BaseAdapter implements Filterable {
                 //get specific items
                 for(int i = 0; i < filterList.size();i++){
                     if (filterList.get(i).getEmail().toUpperCase().contains(constraint)){
-                        UserChild p = new UserChild(filterList.get(i).getEmail(), filterList.get(i).getEmail());
+                        UserChild p = new UserChild(filterList.get(i).getEmail(), filterList.get(i).getUid());
                         filters.add(p);
                     }
                 }

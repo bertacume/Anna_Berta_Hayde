@@ -25,7 +25,8 @@ public class FriendActivity extends AppCompatActivity {
     private TextView user_emailuser;
     private TextView user_nameuser;
     private TextView user_locationuser;
-    private String id_pos;
+    private String user_email;
+    private String user_uid;
     private  Button FollowBtn;
     private Button UnfollowBtn;
     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
@@ -41,9 +42,8 @@ public class FriendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend);
 
-        id_pos = getIntent().getExtras().getString("id_pos");
-        final int id_ = Integer.parseInt(id_pos);
-        userList = (ArrayList<UserChild>) getIntent().getSerializableExtra("userList");
+        user_email = getIntent().getExtras().getString("email");
+        user_uid = getIntent().getExtras().getString("uid");
 
         user_emailuser = (TextView) findViewById(R.id.useremail_txt);
         user_nameuser = (TextView) findViewById(R.id.username_txt);
@@ -52,8 +52,6 @@ public class FriendActivity extends AppCompatActivity {
         Toast_follow = getString(R.string.Following);
         Toast_unfollow = getString(R.string.Unfollowing);
 
-        final String user_email = userList.get(id_).getEmail(); //user_email és l'email de l'amic seleccionat
-        final String user_uid = userList.get(id_).getUid(); //user_uid és l'uid de l'amic seleccionat
 
         user_emailuser.setText(user_email);
 
