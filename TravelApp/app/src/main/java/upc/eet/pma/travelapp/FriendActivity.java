@@ -33,6 +33,8 @@ public class FriendActivity extends AppCompatActivity {
     private ArrayList<UserChild> userList;
     private String Clau;
     private Boolean ja_el_seguim;
+    private String Toast_follow;
+    private String Toast_unfollow;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -46,6 +48,9 @@ public class FriendActivity extends AppCompatActivity {
         user_emailuser = (TextView) findViewById(R.id.useremail_txt);
         user_nameuser = (TextView) findViewById(R.id.username_txt);
         user_locationuser = (TextView) findViewById(R.id.userlocation_txt);
+
+        Toast_follow = getString(R.string.Following);
+        Toast_unfollow = getString(R.string.Unfollowing);
 
         final String user_email = userList.get(id_).getEmail(); //user_email és l'email de l'amic seleccionat
         final String user_uid = userList.get(id_).getUid(); //user_uid és l'uid de l'amic seleccionat
@@ -93,7 +98,7 @@ public class FriendActivity extends AppCompatActivity {
         FollowBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 follow(user_email, user_uid);
-                Toast.makeText(FriendActivity.this, String.format("Following '%s'", user_email), Toast.LENGTH_SHORT).show();
+                Toast.makeText(FriendActivity.this, Toast_follow + ": " + user_email, Toast.LENGTH_SHORT).show();
                 Log.v("FOLLOW", "FOLLOW");
             }
         });
@@ -102,7 +107,7 @@ public class FriendActivity extends AppCompatActivity {
         UnfollowBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 stopFollowing(user_email, user_uid);
-                Toast.makeText(FriendActivity.this, String.format("Unfollowing '%s'", user_email), Toast.LENGTH_SHORT).show();
+                Toast.makeText(FriendActivity.this, Toast_unfollow + ": " + user_email, Toast.LENGTH_SHORT).show();
                 Log.v("UNFOLLOW", "UNFOLLOW");
             }
         });

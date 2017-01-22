@@ -32,11 +32,13 @@ public class SearchActivity extends AppCompatActivity  {
 
     private AdapterUserChild adapter;
     private  ListView mListView;
+    private String prof;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        prof = getString(R.string.Profile);
 
         mListView = (ListView) findViewById(R.id.listViewSearch);
         MyDatabaseUtil.getDatabase(); //Per inicialitzar el Firebase
@@ -65,8 +67,7 @@ public class SearchActivity extends AppCompatActivity  {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View item, int pos, long id) {
-                Toast.makeText(SearchActivity.this, String.format("'%s' Profile",
-                        userList.get(pos).getEmail()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SearchActivity.this, userList.get(pos).getEmail() + "  " + prof, Toast.LENGTH_SHORT).show();
                 //Toast.makeText(SearchActivity.this, String.format("'%s' Profile", userList.get(pos).getDescription()), Toast.LENGTH_SHORT).show();
 
                 Intent i = new Intent("upc.eet.pma.travelapp.FriendActivity");

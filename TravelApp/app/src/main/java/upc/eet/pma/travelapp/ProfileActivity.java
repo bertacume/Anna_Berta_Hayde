@@ -42,6 +42,8 @@ public class ProfileActivity extends AppCompatActivity {
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     DatabaseReference usersRef = mDatabase.child("Users");
     private static final int MY_PERMISION_REQUEST_LOCATION=1;
+    private String toast1;
+    private String toast2;
 
 
 
@@ -50,6 +52,9 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         mlocationTxt = (TextView) findViewById(R.id.locationTxt);
+
+        toast1 = getString(R.string.Not_found);
+        toast2 = getString(R.string.Permission);
 
         if(ContextCompat.checkSelfPermission(ProfileActivity.this,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
@@ -70,7 +75,7 @@ public class ProfileActivity extends AppCompatActivity {
                 mlocationTxt.setText(hereLocation(location.getLatitude(),location.getLongitude()));
             }catch (Exception e){
                 e.printStackTrace();
-                Toast.makeText(ProfileActivity.this,"Not found",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileActivity.this,toast1,Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -143,11 +148,11 @@ public class ProfileActivity extends AppCompatActivity {
                          mlocationTxt.setText(hereLocation(location.getLatitude(),location.getLongitude()));///////////////////////////////////hereLocation
                      }catch (Exception e){
                          e.printStackTrace();
-                         Toast.makeText(ProfileActivity.this,"Not found",Toast.LENGTH_SHORT).show();
+                         Toast.makeText(ProfileActivity.this,toast1,Toast.LENGTH_SHORT).show();
                      }
                  }
                }else{
-                   Toast.makeText(ProfileActivity.this,"Not permission granted",Toast.LENGTH_SHORT).show();
+                   Toast.makeText(ProfileActivity.this,toast2,Toast.LENGTH_SHORT).show();
                }
            }
        }

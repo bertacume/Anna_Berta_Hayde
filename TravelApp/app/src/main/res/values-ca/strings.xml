@@ -34,4 +34,13 @@
     <string name="Password">Contrasenya</string>
     <string name="Profile">PERFIL</string>
     <string name="Save">GUARDAR</string>
+    <string name="Following">Seguint</string>
+    <string name="Unfollowing">Sense seguir</string>
+    <string name="Not_found">No hi ha localització</string>
+    <string name="Permission">Permisos no garantits</string>
+    <string name="Empty">Camps buits</string>
+    <string name="Singin_problem">Hi ha un problema</string>
+    <string name="Log_now">Ja pot entrar</string>
+    <string name="Passwords_mach">Error contrasenyes</string>
+    <string name="Resistration_problem">Hi ha un problema</string>
 </resources>

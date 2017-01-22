@@ -34,4 +34,13 @@
     <string name="Password">Contraseña</string>
     <string name="Profile">PERFIL</string>
     <string name="Save">GUARDAR</string>
+    <string name="Following">Siguiendo</string>
+    <string name="Unfollowing">Sin seguir</string>
+    <string name="Not_found">No hay localización</string>
+    <string name="Permission">Permisos no garantidos</string>
+    <string name="Empty">Campos vacíos</string>
+    <string name="Singin_problem">Hay un problema</string>
+    <string name="Log_now">Ya puede entrar</string>
+    <string name="Passwords_mach">Error contraseñas</string>
+    <string name="Resistration_problem">Hay un problema</string>
 </resources>

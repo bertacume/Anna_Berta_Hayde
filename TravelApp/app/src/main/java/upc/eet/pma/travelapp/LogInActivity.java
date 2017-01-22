@@ -30,6 +30,8 @@ public class LogInActivity extends AppCompatActivity {
     private EditText mEmailField;
     private EditText mPasswordField;
     private Button mLoginBtn,mNewUserBtn;
+    private String toast1;
+    private String toast2;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -37,6 +39,9 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
+
+        toast1 = getString(R.string.Empty);
+        toast2 = getString(R.string.Singin_problem);
 
         mAuth = FirebaseAuth.getInstance();
         mEmailField = (EditText) findViewById(R.id.emailField);
@@ -131,7 +136,7 @@ public class LogInActivity extends AppCompatActivity {
         String email = mEmailField.getText().toString();
         String password = mPasswordField.getText().toString();
         if(TextUtils.isEmpty(email)||TextUtils.isEmpty(password)){
-            Toast.makeText(LogInActivity.this, "Fields are empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(LogInActivity.this, toast1, Toast.LENGTH_LONG).show();
         }
         else {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -141,7 +146,7 @@ public class LogInActivity extends AppCompatActivity {
 
                 if (!task.isSuccessful()) {
                     Log.w(TAG, "signInWithEmail:failed", task.getException());
-                    Toast.makeText(LogInActivity.this, "Sign In Problem", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LogInActivity.this, toast2 , Toast.LENGTH_LONG).show();
                 }
 
 

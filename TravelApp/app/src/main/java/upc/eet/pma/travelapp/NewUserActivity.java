@@ -33,12 +33,21 @@ public class NewUserActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference usersRef = mRef.child("Users");
+    private String toast1;
+    private String toast2;
+    private String toast3;
+    private String toast4;
 
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user);
+
+        toast1 = getString(R.string.Empty);
+        toast2 = getString(R.string.Passwords_mach);
+        toast3 = getString(R.string.Log_now);
+        toast4 = getString(R.string.Resistration_problem);
 
         mName = (EditText) findViewById(R.id.nameTxt);
         mEmail = (EditText) findViewById(R.id.emailTxt);
@@ -118,10 +127,10 @@ public class NewUserActivity extends AppCompatActivity {
         String confirmpassword = mConfirmPassword.getText().toString();
 
         if(!password.equals(confirmpassword)){
-            Toast.makeText(NewUserActivity.this, "Passwords don't match", Toast.LENGTH_LONG).show();
+            Toast.makeText(NewUserActivity.this, toast2, Toast.LENGTH_LONG).show();
         }
         if(TextUtils.isEmpty(email)||TextUtils.isEmpty(password)||TextUtils.isEmpty(confirmpassword)||TextUtils.isEmpty(name)){
-            Toast.makeText(NewUserActivity.this, "Fields are empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(NewUserActivity.this, toast1, Toast.LENGTH_LONG).show();
         }
         else {
 
@@ -133,9 +142,9 @@ public class NewUserActivity extends AppCompatActivity {
 
 
                     if (!task.isSuccessful()) {
-                        Toast.makeText(NewUserActivity.this, "Registration Problem", Toast.LENGTH_LONG).show();
+                        Toast.makeText(NewUserActivity.this, toast4, Toast.LENGTH_LONG).show();
                     }
-                    Toast.makeText(NewUserActivity.this, "You can log in now", Toast.LENGTH_LONG).show();
+                    Toast.makeText(NewUserActivity.this,toast3, Toast.LENGTH_LONG).show();
 
                 }
             });

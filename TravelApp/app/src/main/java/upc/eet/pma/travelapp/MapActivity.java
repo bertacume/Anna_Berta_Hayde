@@ -52,6 +52,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private TextView location_txt;
     double lat = 0.0;
     double lng = 0.0;
+    private String myloc;
 
     private FirebaseDatabase usersDatabase;
     private DatabaseReference usersDatabaseReference;
@@ -69,6 +70,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String userId = user.getUid();
         usersDatabaseReference = usersDatabase.getReference().child("Users").child(userId).child("friendsList");
+        myloc = getString(R.string.Im_here);
 
 
         if (User.currentUser != null) {
@@ -158,7 +160,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         CameraUpdate my_Location = CameraUpdateFactory.newLatLngZoom(coordinates,16);
         MarkerOptions options = new MarkerOptions()
                 .position(coordinates)
-                .title("I am here!")
+                .title(myloc)
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.placeholder));
         mMap.addMarker(options);
         //animateCamera(coordinates);

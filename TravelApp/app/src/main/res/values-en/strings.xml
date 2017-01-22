@@ -34,4 +34,13 @@
     <string name="Password">Password</string>
     <string name="Profile">PROFILE</string>
     <string name="Save">SAVE</string>
+    <string name="Following">Following</string>
+    <string name="Unfollowing">Unfollowing</string>
+    <string name="Not_found">Location not found</string>
+    <string name="Permission">Not permission granted</string>
+    <string name="Empty">Fields are empty</string>
+    <string name="Singin_problem">Sign In Problem</string>
+    <string name="Log_now">You can log in now</string>
+    <string name="Passwords_mach">Wrong Passwords</string>
+    <string name="Resistration_problem">Registration Problem</string>
 </resources>
