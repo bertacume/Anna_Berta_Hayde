@@ -46,11 +46,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private Button mSearchBtn;
     private Button mRequestsBtn;
     private Button mMyFriendsBtn;
+    private Button myLocation;
     private GoogleMap mMap;
     private Marker marker;
     private Marker friendMarker;
     private TextView location_txt;
-    private Button mLocation;
     double lat = 0.0;
     double lng = 0.0;
 
@@ -99,7 +99,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
 
 
-
         mProfileBtn = (Button) findViewById(R.id.ProfileBtn);
         mProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,6 +138,15 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             }
         });
 
+        myLocation = (Button) findViewById(R.id.MyLocationBtn);
+        myLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LatLng coordinates = getCoordinates();
+                animateCamera(coordinates);
+            }
+        });
+
         location_txt = (TextView) findViewById(R.id.locationTxt);
     }
 
@@ -147,32 +155,26 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         return;
     }
 
-    private void LocationToString(Location location) {
-
-        if (location != null) {
-
-            lat = location.getLatitude();
-            lng = location.getLongitude();
-            String lat_str = Double.toString(lat);
-            String lng_str = Double.toString(lng);
-            String latlng = lat_str + "," + lng_str;
-            //return latlng;
-            location_txt.setText(latlng);
-        }
-        //else {location_txt.setText("0.0");}
-        //return "0.0";
+    private void animateCamera(LatLng coordinates){
+        CameraUpdate my_Location = CameraUpdateFactory.newLatLngZoom(coordinates,16);
+        mMap.animateCamera(my_Location);
     }
 
-    private void addMarker(double lat, double lng){
-        LatLng coordinates = new LatLng(lat,lng);
-        CameraUpdate my_Location = CameraUpdateFactory.newLatLngZoom(coordinates,16);
+    private void animateCameraFriend(LatLng coordinates){
+
+    }
+
+    private void addMarker(LatLng coordinates){
         if (marker != null) marker.remove();
+        CameraUpdate my_Location = CameraUpdateFactory.newLatLngZoom(coordinates,16);
         MarkerOptions options = new MarkerOptions()
                 .position(coordinates)
                 .title("I am here!")
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
         mMap.addMarker(options);
-        mMap.animateCamera(my_Location);
+        //animateCamera(coordinates);
+        //CameraUpdate my_Location = CameraUpdateFactory.newLatLngZoom(coordinates,16);
+        //mMap.animateCamera(my_Location);
         //marcador personal afegit
 
     }
@@ -188,16 +190,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
     }
 
-    private void refreshLocation(Location location){
-        if(location!=null){
-            lat = location.getLatitude();
-            lng = location.getLongitude();
-        }
-        addMarker(lat,lng);
-    }
-
-    private void myLocation() {
-
+    private LatLng getCoordinates (){
         LocationManager locationManager = (LocationManager) this.getSystemService(android.content.Context.LOCATION_SERVICE);
         List<String> providers = locationManager.getProviders(true);
         android.location.Location bestLocation = null;
@@ -209,8 +202,17 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 }
             }
         }
-        refreshLocation(bestLocation);
-        //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        if(bestLocation!=null){
+            lat = bestLocation.getLatitude();
+            lng = bestLocation.getLongitude();
+        }
+        LatLng coordinates = new LatLng(lat,lng);
+        return coordinates;
+    }
+
+    private void myLocation() {
+        LatLng coordinates = getCoordinates();
+        addMarker(coordinates);
     }
 
     public void myFriendsLocation (){
@@ -234,9 +236,17 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                     // Get each user email and Location
                                     String email = dataSnapshot.getValue(User.class).email;
                                     String uLocation = dataSnapshot.getValue(User.class).ulocation;
-                                    LatLng LatLng_ulocation = getLocationFromAddress(uLocation);
-                                    addFriendMarker(LatLng_ulocation,email);
-                                    Log.v("LocationFriend", uLocation);
+                                    if ( uLocation.equals("Location") || uLocation.equals(null)){
+                                        uLocation = "Location";
+                                    }
+                                    else {
+                                        LatLng LatLng_ulocation = getLocationFromAddress(uLocation);
+                                        if (LatLng_ulocation.equals(null)){
+
+                                        }else{
+                                            addFriendMarker(LatLng_ulocation, email);
+                                            Log.v("LocationFriend", uLocation);}
+                                    }
 
                                 }
                                 @Override
@@ -293,6 +303,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     }
 
 }
+
 
 
 

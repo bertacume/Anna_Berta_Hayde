@@ -68,6 +68,15 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
 
+        <Button
+            android:text="My Location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/MyLocationBtn"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_above="@+id/MyFriendsBtn"
+            android:layout_centerHorizontal="true" />
+
     </RelativeLayout>
 
 
