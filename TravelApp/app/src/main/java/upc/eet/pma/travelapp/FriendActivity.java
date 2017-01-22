@@ -11,8 +11,13 @@ import android.widget.ToggleButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,12 +27,13 @@ public class FriendActivity extends AppCompatActivity {
     private FirebaseDatabase usersDatabase;
     private DatabaseReference usersDatabaseReference;
     private TextView user_emailuser;
+    private TextView user_nameuser;
+    private TextView user_locationuser;
     private String id_pos;
-    private ToggleButton Follow;
     private  Button FollowBtn;
     private Button UnfollowBtn;
     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference friendsRef = mRef.child("Users").child("friendsList");
+    DatabaseReference userRef = mRef.child("Users");
     private ArrayList<UserChild> userList;
     private String Clau;
     private Boolean ja_el_seguim;
@@ -40,12 +46,31 @@ public class FriendActivity extends AppCompatActivity {
         id_pos = getIntent().getExtras().getString("id_pos");
         final int id_ = Integer.parseInt(id_pos);
         userList = (ArrayList<UserChild>) getIntent().getSerializableExtra("userList");
+
         user_emailuser = (TextView) findViewById(R.id.useremail_txt);
+        user_nameuser = (TextView) findViewById(R.id.username_txt);
+        user_locationuser = (TextView) findViewById(R.id.userlocation_txt);
+
         final String user_email = userList.get(id_).getEmail(); //user_email és l'email de l'amic seleccionat
         final String user_uid = userList.get(id_).getUid(); //user_uid és l'uid de l'amic seleccionat
+
         user_emailuser.setText(user_email);
 
-        Follow = (ToggleButton) findViewById(R.id.FollowBtn);
+        //Agafem les dades de l'amic del firebase
+        userRef.child(user_uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String user_name = dataSnapshot.getValue(User.class).full_name;
+                String user_location = dataSnapshot.getValue(User.class).ulocation;
+                user_nameuser.setText(user_name);
+                user_locationuser.setText(user_location);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+        //Follow = (ToggleButton) findViewById(R.id.FollowBtn);
         FollowBtn = (Button) findViewById (R.id.Follow_Btn);
         UnfollowBtn = (Button) findViewById(R.id.Unfollow_Btn);
 

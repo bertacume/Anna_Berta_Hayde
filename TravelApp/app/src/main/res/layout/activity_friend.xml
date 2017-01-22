@@ -1,41 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <Button
+        android:text="FOLLOW"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Follow_Btn"
+        android:elevation="1dp"
+        android:layout_below="@+id/userlocation_txt"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="UNFOLLOW"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Unfollow_Btn"
+        android:layout_below="@+id/Follow_Btn"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="TextView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:textStyle="normal|bold"
+        android:textSize="24sp"
+        android:paddingTop="15dp"
+        android:paddingLeft="15dp"
+        android:id="@+id/username_txt"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/useremail_txt" />
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/useremail_txt"
+        android:paddingBottom="15dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:textSize="18sp"
+        android:layout_below="@+id/username_txt"
+        android:layout_alignRight="@+id/Follow_Btn"
+        android:layout_alignEnd="@+id/Follow_Btn" />
 
-        <ToggleButton
-            android:text="ToggleButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:textOn="Unfollow"
-            tools:textOff="Follow"
-            android:id="@+id/FollowBtn"
-            android:textOff="Follow"
-            android:textOn="Unfollow" />
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/userlocation_txt"
+        android:paddingLeft="15dp"
+        android:paddingBottom="15dp"
+        android:textStyle="italic"
+        android:textSize="14sp"
+        android:layout_below="@+id/useremail_txt"
+        android:layout_centerHorizontal="true" />
 
-        <Button
-            android:text="FOLLOW"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/Follow_Btn" />
-
-        <Button
-            android:text="UNFOLLOW"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/Unfollow_Btn" />
-
-    </LinearLayout>
-</LinearLayout>
+</RelativeLayout>
