@@ -51,12 +51,12 @@
             android:backgroundTint="@color/colorPrimary" />
 
         <Button
-            android:text="Requests"
+            android:text="My Location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/RequestsBtn"
+            android:id="@+id/MyLocationBtn"
             android:backgroundTint="@color/colorPrimary"
-            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
 
         <Button
@@ -65,17 +65,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/MyFriendsBtn"
             android:backgroundTint="@color/colorPrimary"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
-
-        <Button
-            android:text="My Location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/MyLocationBtn"
-            android:backgroundTint="@color/colorPrimary"
-            android:layout_above="@+id/MyFriendsBtn"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/MyLocationBtn"
+            android:layout_alignEnd="@+id/MyLocationBtn" />
 
     </RelativeLayout>
 

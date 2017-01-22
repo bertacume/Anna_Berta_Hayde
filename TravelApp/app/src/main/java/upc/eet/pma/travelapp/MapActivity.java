@@ -44,7 +44,6 @@ import java.util.Set;
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback  {
     private Button mProfileBtn;
     private Button mSearchBtn;
-    private Button mRequestsBtn;
     private Button mMyFriendsBtn;
     private Button myLocation;
     private GoogleMap mMap;
@@ -113,16 +112,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             @Override
             public void onClick(View v) {
                 Intent i = new Intent("upc.eet.pma.travelapp.SearchActivity");
-                startActivity(i);
-
-            }
-        });
-
-        mRequestsBtn = (Button) findViewById(R.id.RequestsBtn);
-        mRequestsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent("upc.eet.pma.travelapp.RequestsActivity");
                 startActivity(i);
 
             }
