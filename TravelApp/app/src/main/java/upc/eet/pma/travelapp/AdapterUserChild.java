@@ -61,7 +61,7 @@ public class AdapterUserChild extends BaseAdapter implements Filterable {
 
         if (convertView == null) {
             LayoutInflater inf = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inf.inflate(R.layout.item_userchild, null);
+            v = inf.inflate(R.layout.item_userchildclass, null);
         }
 
         UserChild dir = items.get(position);
