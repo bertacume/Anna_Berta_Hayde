@@ -23,7 +23,6 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="normal|bold"
@@ -35,7 +34,6 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/useremail_txt"
@@ -46,7 +44,6 @@
         android:layout_below="@+id/username_txt" />
 
     <TextView
-        android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/userlocation_txt"

@@ -159,7 +159,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         MarkerOptions options = new MarkerOptions()
                 .position(coordinates)
                 .title("I am here!")
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.placeholder));
         mMap.addMarker(options);
         //animateCamera(coordinates);
         //CameraUpdate my_Location = CameraUpdateFactory.newLatLngZoom(coordinates,16);
@@ -174,7 +174,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         MarkerOptions optionsFriend = new MarkerOptions()
                 .position(friendCoordinates)
                 .title(email)
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.placeholder));
         mMap.addMarker(optionsFriend);
 
     }
