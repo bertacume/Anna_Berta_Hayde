@@ -22,7 +22,7 @@ public class MyFriendsActivity extends AppCompatActivity {
     private DatabaseReference usersDatabaseReference;
 
     private ArrayList<UserChild> userList;
-    private AdapterUserChild adapter;
+    private AdapterMyFriends adapter;
     private ListView mListView;
 
     @Override
@@ -126,7 +126,7 @@ public class MyFriendsActivity extends AppCompatActivity {
                     );
 
                 }
-                adapter = new AdapterUserChild(
+                adapter = new AdapterMyFriends(
                         MyFriendsActivity.this,
                         userList);
                 mListView.setAdapter(adapter);
