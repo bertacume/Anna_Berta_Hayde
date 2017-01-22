@@ -22,7 +22,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class LogInActivity extends AppCompatActivity {
@@ -96,7 +95,6 @@ public class LogInActivity extends AppCompatActivity {
 
                         }
                     });
-                    // Firebase Current User Data saved into User.currentuser (static object)
 
                     // User is signed in
                     Intent i = new Intent("upc.eet.pma.travelapp.MapActivity");

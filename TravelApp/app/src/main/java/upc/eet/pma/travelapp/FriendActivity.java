@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,15 +16,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class FriendActivity extends AppCompatActivity {
-    private FirebaseDatabase usersDatabase;
-    private DatabaseReference usersDatabaseReference;
+
     private TextView user_emailuser;
     private TextView user_nameuser;
     private TextView user_locationuser;
@@ -70,7 +66,6 @@ public class FriendActivity extends AppCompatActivity {
             }
         });
 
-        //Follow = (ToggleButton) findViewById(R.id.FollowBtn);
         FollowBtn = (Button) findViewById (R.id.Follow_Btn);
         UnfollowBtn = (Button) findViewById(R.id.Unfollow_Btn);
 
@@ -111,24 +106,8 @@ public class FriendActivity extends AppCompatActivity {
                 Log.v("UNFOLLOW", "UNFOLLOW");
             }
         });
-
-
-
-       /* Follow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // Botón encendido
-                    follow(user_email, user_uid);
-                    Toast.makeText(FriendActivity.this, String.format("Following '%s'", user_email), Toast.LENGTH_SHORT).show();
-                } else {
-                    // Botón apagado
-                    stopFollowing(user_email);
-                    Toast.makeText(FriendActivity.this, String.format("Unfollowing '%s'", user_email), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });*/
-    }}
+    }
+    }
 
 
     //Agregar al contacto a tu lista de amigos

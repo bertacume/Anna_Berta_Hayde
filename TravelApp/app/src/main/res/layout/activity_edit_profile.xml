@@ -30,9 +30,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="180dp"
-        android:singleLine="false"
-        android:selectAllOnFocus="false"
-        android:textCursorDrawable="@color/com_facebook_button_background_color_focused_disabled"
-        android:textColorLink="?android:attr/colorControlNormal" />
+        />
 
 </RelativeLayout>

@@ -1,13 +1,11 @@
 package upc.eet.pma.travelapp;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -41,15 +39,11 @@ public class EditProfileActivity extends AppCompatActivity {
                         // Get user value
                         String uName = dataSnapshot.getValue(String.class);
                         meditFullName.setText(uName);
-
-
-                        // ...
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         Log.w(TAG, "getUser:onCancelled", databaseError.toException());
-                        // ...
                     }
                 }
         );

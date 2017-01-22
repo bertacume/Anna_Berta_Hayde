@@ -1,9 +1,7 @@
 package upc.eet.pma.travelapp;
 
 
-import android.*;
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -52,7 +50,6 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         mlocationTxt = (TextView) findViewById(R.id.locationTxt);
-        //mlocationTxt.setText("holaaa");
 
         if(ContextCompat.checkSelfPermission(ProfileActivity.this,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
@@ -70,17 +67,12 @@ public class ProfileActivity extends AppCompatActivity {
             LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             Location location =locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             try{
-                mlocationTxt.setText(hereLocation(location.getLatitude(),location.getLongitude()));/////////////////////////here
+                mlocationTxt.setText(hereLocation(location.getLatitude(),location.getLongitude()));
             }catch (Exception e){
                 e.printStackTrace();
                 Toast.makeText(ProfileActivity.this,"Not found",Toast.LENGTH_SHORT).show();
             }
         }
-
-
-
-
-
 
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String userId = user.getUid();
@@ -95,14 +87,11 @@ public class ProfileActivity extends AppCompatActivity {
                         mUserName = (TextView) findViewById(R.id.userNametxt);
 
                         mUserName.setText(uName);
-
-                        // ...
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         Log.w(TAG, "getUser:onCancelled", databaseError.toException());
-                        // ...
                     }
                 }
         );
@@ -134,14 +123,11 @@ public class ProfileActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user == null) {
-                    // user auth state is changed - user is null
-                    // launch login activity
                     startActivity(new Intent(ProfileActivity.this, LogInActivity.class));
                     finish();
                 }
             }
         };
-
     }
 
     @Override
@@ -211,10 +197,4 @@ public class ProfileActivity extends AppCompatActivity {
             auth.removeAuthStateListener(authListener);
         }
     }
-
-
-
-
-
-
 }

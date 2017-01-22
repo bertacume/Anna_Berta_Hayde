@@ -53,8 +53,4 @@
         android:layout_alignLeft="@+id/passwordField"
         android:layout_alignStart="@+id/passwordField" />
 
-    <!-- android:background="?android:attr/colorEdgeEffect" -->
-
-    <!-- android:background="?android:attr/colorEdgeEffect" -->
-
 </RelativeLayout>

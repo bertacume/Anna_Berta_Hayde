@@ -1,7 +1,5 @@
 package upc.eet.pma.travelapp;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,10 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class NewUserActivity extends AppCompatActivity {
 
@@ -65,8 +58,6 @@ public class NewUserActivity extends AppCompatActivity {
         mNewUserBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //saveNewUser();
-
                 startRegistration();
 
             }
@@ -83,9 +74,6 @@ public class NewUserActivity extends AppCompatActivity {
                     HashMap<String, Object> friendsList = new HashMap<String, Object>(1, 1);
                     String ulocation="Location";
                     String Uid_ = userId;
-                   // Map<String,Object> friendList= new TreeMap<String,Object>();
-
-                   // String friendsList="";
                     boolean isFantasma = false;
 
                     writeNewUser(userId,name,email, friendsList, ulocation,isFantasma,Uid_);
@@ -94,7 +82,6 @@ public class NewUserActivity extends AppCompatActivity {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
-                // ...
             }
 
         };
@@ -114,19 +101,11 @@ public class NewUserActivity extends AppCompatActivity {
     }
     private void writeNewUser(String userId, String name,String email, Map friendsList, String ulocation ,boolean isFantasma, String Uid_) {
 
-        //User user = new User(name,email,ulocation,isFantasma,friendList);
-        //mRef.child("Users").child(userId).setValue(user);
-
-        // Create new post at /user-posts/$userid/$postid and at
-        // /posts/$postid simultaneously
-        //String key = mRef.child("Users").push().getKey();
         User user = new User(name, email, friendsList, ulocation,isFantasma, Uid_);
         Map<String, Object> postValues = user.toMap();
-        //Map<String, String> friendsList = new HashMap<>();
 
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/Users/" + userId, postValues);
-       // childUpdates.put("/Users/"+userId+ "/friendsList/"+"/" + key, postValues);
 
         mRef.updateChildren(childUpdates);
     }
