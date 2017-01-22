@@ -42,9 +42,7 @@
         android:paddingLeft="15dp"
         android:paddingTop="15dp"
         android:textSize="18sp"
-        android:layout_below="@+id/username_txt"
-        android:layout_alignRight="@+id/Follow_Btn"
-        android:layout_alignEnd="@+id/Follow_Btn" />
+        android:layout_below="@+id/username_txt" />
 
     <TextView
         android:text="TextView"
