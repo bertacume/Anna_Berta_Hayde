@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Verkko</string>
+    <string name="Search">BUSCAR</string>
+    <string name="Unfollow">DEJAR DE SEGUIR</string>
+    <string name="complete_name">Nombre Completo</string>
+    <string name="confirm">Confirmar</string>
+    <string name="edit_name">EDITAR NOMBRE</string>
+    <string name="editprofile">Editar Perfil</string>
+    <string name="email">E-mail</string>
+    <string name="email_address">Correo</string>
+    <string name="enter_password">Contraseña</string>
+    <string name="full_name">Nombre Completo</string>
+    <string name="location">Mi localización</string>
+    <string name="log_in">Entrar</string>
+    <string name="map">Map</string>
+    <string name="logout">Salir</string>
+    <string name="my_profile">Perfil</string>
+    <string name="name">Nombre</string>
+    <string name="new_user">Usuario Nuevo</string>
+    <string name="password">Contraseña</string>
+    <string name="profile_pic">Foto de perfil</string>
+    <string name="reenter_password">Contraseña</string>
+    <string name="username">Nombre de usuario</string>
+    <string name="Mail">E-mail</string>
+    <string name="Im_here">Estoy aquí!</string>
+    <string name="Follow">SEGUIR</string>
+    <string name="Confirm">Confirmar</string>
+    <string name="Mail_address">Correo</string>
+    <string name="My_friends">AMIGOS</string>
+    <string name="My_location">MI LOCALIZACIÓN</string>
+    <string name="Name">Nombre</string>
+    <string name="New_user">CREAR UN USUARIO NUEVO</string>
+    <string name="Password">Contraseña</string>
+    <string name="Profile">PERFIL</string>
+    <string name="Save">GUARDAR</string>
+</resources>
