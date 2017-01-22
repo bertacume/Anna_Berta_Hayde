@@ -15,23 +15,30 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 
 public class MyFriendsActivity extends AppCompatActivity {
     private FirebaseDatabase usersDatabase;
     private DatabaseReference usersDatabaseReference;
 
-    private ArrayList<String> userList;
-    private ArrayAdapter adapter;
+    private ArrayList<UserChild> userList;
+    private AdapterMyFriends adapter;
     private ListView mListView;
 
     private String friend_uid;
+    private UserChild userChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState!=null) {
+        }
         setContentView(R.layout.activity_myfriends);
+
+
 
         mListView = (ListView) findViewById(R.id.listViewMyFriends);
 
@@ -41,26 +48,35 @@ public class MyFriendsActivity extends AppCompatActivity {
         final String currentuserId = user.getUid();
         usersDatabaseReference = usersDatabase.getReference().child("Users").child(currentuserId).child("friendsList");
         addValueEventListener(usersDatabaseReference);
+
         userList = new ArrayList<>();
+
         for ( String key : User.currentUser.friendsList.keySet() ) {
             friend_uid = User.currentUser.friendsList.get(key).toString();
             friend_uid = friend_uid.substring(12);
             friend_uid = friend_uid.substring(0, friend_uid.length()-1);
+
             DatabaseReference usersRef = usersDatabase.getReference().child("Users");
-            usersRef.child(friend_uid).child("full_name").addListenerForSingleValueEvent(
+            usersRef.child(friend_uid).addValueEventListener(
                     new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             // Get user value
-                            String full_name = dataSnapshot.getValue(String.class);
-                            //String uLocation = dataSnapshot.getValue(User.class).ulocation;
-                            userList.add(full_name);
-                            adapter = new ArrayAdapter<>(
+                            if (dataSnapshot.getValue() != null){
+                            String full_name = dataSnapshot.getValue(User.class).full_name;
+                            String uLocation = dataSnapshot.getValue(User.class).ulocation;
+
+
+                            userChild = new UserChild(full_name,uLocation);
+                            userList.add(userChild);
+
+
+                            adapter = new AdapterMyFriends(
                                     MyFriendsActivity.this,
-                                    android.R.layout.simple_list_item_1,
                                     userList);
-                            mListView.setAdapter(adapter);
-                        }
+                            mListView.setAdapter(adapter);}}
+
+
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
@@ -68,7 +84,10 @@ public class MyFriendsActivity extends AppCompatActivity {
                         }
                     });
             }
+
+
     }
+
 
     private void addValueEventListener(final DatabaseReference userReference) {
         userReference.addValueEventListener(new ValueEventListener() {
@@ -95,5 +114,6 @@ public class MyFriendsActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }
