@@ -85,6 +85,8 @@ public class FriendActivity extends AppCompatActivity {
                     Clau = key;
             }}
 
+        // Aquí s'hauria simplement de canviar el text d'un sol botó!
+        // Es posa només un listener i llavors es decideix què es fa en funció de la situació...
         if (ja_el_seguim!=true) {
             FollowBtn.setVisibility(View.VISIBLE);
             UnfollowBtn.setVisibility(View.GONE);
@@ -129,6 +131,7 @@ public class FriendActivity extends AppCompatActivity {
         childUpdates.put("/Users/"+currentuserId+ "/friendsList/"+"/" + key, friendsList);
         mRef.updateChildren(childUpdates);
 
+        // Aquí s'hauria simplement de canviar el text del botó!
         FollowBtn.setVisibility (View.GONE);
         UnfollowBtn.setVisibility (View.VISIBLE);
 
@@ -148,6 +151,7 @@ public class FriendActivity extends AppCompatActivity {
         childUpdates.put("/Users/"+currentuserId+ "/friendsList/"+"/" + Clau, friendsList);
         mRef.updateChildren(childUpdates);
 
+        // Aquí s'hauria simplement de canviar el text del botó!
         FollowBtn.setVisibility(View.VISIBLE);
         UnfollowBtn.setVisibility(View.GONE);
 

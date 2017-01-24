@@ -141,9 +141,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         location_txt = (TextView) findViewById(R.id.locationTxt);
     }
 
+    // Això no ho posaria, perquè és lleig no deixar marxar a l'usuari de la app!
+    // Es pot posar una variable que digui que si apretes dos cops, llavors sí que marxa.
     @Override
     public void onBackPressed() {
-        return;
+        // return; // no cal el 'return'
     }
 
     private void animateCamera(LatLng coordinates){
